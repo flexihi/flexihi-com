@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Contact from './Contact';
 import { FaChevronDown } from 'react-icons/fa6';
 import { Transition } from '@headlessui/react';
@@ -24,7 +24,7 @@ export default function FAQs() {
     title: string;
   }) => {
     const isOpen = selected === index;
-    const [changed, setChanged] = useState(false);
+    // const [changed, setChanged] = useState(false);
 
     // const useList = children?.toString().includes("||li||");
     // let listItems: string[] = [];
@@ -33,11 +33,11 @@ export default function FAQs() {
     //   listItems = children?.toString().split("||li||") || [];
     // }
 
-    useEffect(() => {
-      setTimeout(() => {
-        setChanged(!changed);
-      }, 100);
-    }, [isOpen]);
+    // useEffect(() => {
+    //   setTimeout(() => {
+    //     setChanged(prev => !prev);
+    //   }, 100);
+    // }, [isOpen]);
 
     return (
       <li className='border-b border-[#E2E8F0] py-8'>

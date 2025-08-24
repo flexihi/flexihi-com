@@ -12,6 +12,7 @@ import featureImage8 from "@/public/features-8.svg";
 import arrowForward from "@/public/features-arrow-forward.svg";
 import arrowBack from "@/public/features-arrow-back.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper";
 import {
   A11y,
   Autoplay,
@@ -33,7 +34,7 @@ interface FeatureProps {
 }
 
 export default function Features({ locale }: LocaleProps) {
-  const [swiper, setSwiper] = useState<any>();
+  const [swiper, setSwiper] = useState<SwiperType>();
   const t = useTranslations("Features");
 
   const slidesList: FeatureProps[] = [
@@ -121,6 +122,7 @@ export default function Features({ locale }: LocaleProps) {
                           })} */}
                           <button
                             onClick={() => {
+                              if (!swiper) return;
                               if (index !== 0) {
                                 swiper.slideTo(index - 1);
                               } else {
@@ -137,6 +139,7 @@ export default function Features({ locale }: LocaleProps) {
                           </button>
                           <button
                             onClick={() => {
+                              if (!swiper) return;
                               if (index < slidesList.length - 1) {
                                 swiper.slideTo(index + 1);
                               } else {
