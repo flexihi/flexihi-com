@@ -1,0 +1,115 @@
+{
+  "NavBar": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "faqs": "FAQs",
+    "login": "Login",
+    "signUp": "Sign up",
+    "lang": "عـربـي"
+  },
+  "Hero": {
+    "title": "Empower Your Sales, Simplify Your Workflow",
+    "subtitle": "Inventory and Sales Management System!",
+    "description": "FlexiHi is your all-in-one solution for inventory and sales management, designed to streamline your workflow, enhance collaboration, and boost productivity. With our user-friendly platform, you can effortlessly plan, execute, and track your sales from start to finish, all in one place.",
+    "buttons": {
+      "start": "Get Started",
+      "demos": "See Demos"
+    }
+  },
+  "Services": {
+    "title": "Our Services",
+    "description": "Take your sales to new level with our Inventory and Sales Management System. Get started today and discover the difference it can make for your business!",
+    "speed": {
+      "title": "Speed",
+      "description": "We ensure that your sales transactions and inventory management processes are completed quickly."
+    },
+    "support": {
+      "title": "Support",
+      "description": "Our dedicated support team is always available to assist you every step of the way, providing guidance and resolving any issues you face in the system."
+    },
+    "installation": {
+      "title": "Installation",
+      "description": "We offer installation services to help you install and activate the system without any difficulties, so you can start managing your  sales and inventory smoothly."
+    }
+  },
+  "Features": {
+    "title": "Features",
+    "description": "FlexiHi offers a range of features and benefits to help you manage your inventory and sales with ease.",
+    "feature1": {
+      "title": "Advance Inventory\nManagement System",
+      "description": "Keep track of your inventory and make sure that you always have the products available for your customers. Our inventory management system can help you to manage and organize your inventory, so you never run out of stock and can easily track your products."
+    },
+    "feature2": {
+      "title": "Employee Management",
+      "description": "This feature allows you to manage employees efficiently using the POS system. You can add new employees, assign roles and permissions, and track their work hours and performance with ease."
+    },
+    "feature3": {
+      "title": "Advance Reporting",
+      "description": "Obtain valuable insights into your sales performance to identify growth opportunities and areas for improvement. The system provides comprehensive real-time reporting on sales, inventory and customer data, allowing you to make decisions to improve your sales performance."
+    },
+    "feature4": {
+      "title": "Multi-store Management",
+      "description": "Easily manage inventory levels, products, pricing, and promotions across different locations from a single dashboard. Whether you have two stores or twenty, FlexiHi simplifies multi-store management and helps you manage your inventory and sales effectively."
+    },
+    "feature5": {
+      "title": "Invoices & Quotations",
+      "description": "You can easily create and send customized  invoices and quotes for your brand. With just a few clicks, track all your transactions and payment statuses, and send reminder notifications to customers about due payments. Say goodbye to manual invoicing and quotation processes and hello to efficiency and accuracy with FlexiHi!"
+    },
+    "feature6": {
+      "title": "Installment Management",
+      "description": "You can easily set up and manage installment plans for your customers, making it easier for them to make purchases while spreading out payments over time.  Our system allows you to create customized installment plans based on your business needs, set payment schedules, track payment statuses, and send reminders."
+    },
+    "feature7": {
+      "title": "Point of Sale System (Cashier)",
+      "description": "You can manage your sales, from issuing quotes and invoices to selling products, completing the payment process, and tracking sales and profitability in real time. We offers a convenient and flexible solution for businesses to manage their sales."
+    },
+    "feature8": {
+      "title": "Loyalty & Promotion Management",
+      "description": "You can manage loyalty programs and promotions, ensuring seamless engagement with your customers. With FlexiHi, you can simplify your promotions, track customer loyalty, and increase sales. Now,  create customized promotions and rewards programs for your customers."
+    }
+  },
+  "Demos": {
+    "title": "Demos",
+    "description": "Whether you're in retail or wholesale, or having restaurants and shops, we’ve got you covered. FlexiHI manages all your inventory and sales requirements."
+  },
+  "Pricing": {
+    "title": "Pricing & Plans",
+    "description": "Choose the plan that best fits your requirements and budget. Get started today and take your sales to the next level!"
+  },
+  "FAQs": {
+    "title": "Frequently Asked Questions",
+    "description": "Description Description Description Description Description Description Description",
+    "0": {
+      "question": "What kind of hardware can work with FlexiHi POS software?",
+      "answer": "The FlexiHi POS software can work with barcode scanners, receipt printers, cash drawers, and other similar hardware. You can use it on iPads and Android tablets, but they need to meet certain requirements. For more details, you can contact the sales team."
+    },
+    "1": {
+      "question": "The FlexiHi POS software works offline?",
+      "answer": " Yes, the FlexiHi POS software works offline. Your device can still make sales and manage shifts even without an internet connection. However, some features like refunds, new customer registration, and a few others won't work or will be limited while offline."
+    },
+    "2": {
+      "question": "Does FlexiHi POS software have the functionality of loyalty cards?",
+      "answer": "Yes, FlexiHi POS software has a built-in loyalty program. You can give your regular customers loyalty cards with a printed barcode. When they visit your store, the cashier can scan the barcode to identify them. You can also identify customers by their phone number."
+    },
+    "3": {
+      "question": "Do I need to have a deep understanding of accounting to work with FlexiHi POS Software?",
+      "answer": "You don't need to have a deep understanding of accounting to work with FlexiHi POS software. It has an easy-to-use interface that suits all users, along with advanced tools to help experts complete their tasks professionally."
+    },
+    "4": {
+      "question": "Can I record expenses on the FlexiHi POS software?",
+      "answer": "Yes, you can record expenses on the FlexiHi POS software. FlexiHi has an Expenses feature that makes it easy and accurate to track your costs and spending."
+    },
+    "5": {
+      "question": "Does FlexiHi POS software supply the cashier devices?",
+      "answer": "Yes, we provide the business owner with a cashier device, a barcode reader, cash drawer, printers, and other necessary equipment by discounted prices"
+    },
+    "6": {
+      "question": "Can i get a trail version before I subscribe?",
+      "answer": "There are several demos available where you can explore the whole system before subscribing."
+    }
+  },
+  "Apps": {
+    "title": "Enhance your sales process with FlexiHI!",
+    "description": "Download our app today from Google Play or Apple Store"
+  }
+}
