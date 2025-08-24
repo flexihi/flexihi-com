@@ -12,7 +12,7 @@ export default function Hero({ locale }: LocaleProps) {
     <div className="relative w-full flex flex-col items-center h-[866px] overflow-x-hidden">
       <div className="relative w-full flex justify-center">
         <div className="relative max-w-content w-full">
-          <div className="absolute end-[-50px] top-[-50px] w-[406px] h-[406px] bg-[#FF9800] rounded-full bg-opacity-60" />
+          <div className="absolute end-[-50px] top-[-50px] w-[406px] h-[406px] bg-accent rounded-full bg-opacity-60" />
           <div className="absolute end-[443px] top-[464px] w-[168px] h-[168px] bg-primary-light rounded-full bg-opacity-60" />
         </div>
       </div>
@@ -54,18 +54,12 @@ export default function Hero({ locale }: LocaleProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button
-                  className="bg-secondary text-white border border-transparent px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:bg-primary transition-all duration-200"
-                  type="button"
-                >
+                <button className="btn-primary" type="button">
                   {t("buttons.start")}
                 </button>
               </a>
               <Link href="/#demos">
-                <button
-                  className="bg-transparent text-secondary border border-secondary px-6 py-3 rounded-xl hover:shadow-lg hover:bg-opacity-90 transition-all duration-200"
-                  type="button"
-                >
+                <button className="btn-secondary" type="button">
                   {t("buttons.demos")}
                 </button>
               </Link>

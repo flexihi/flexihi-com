@@ -13,7 +13,7 @@ export default function Pricing() {
 
   const SimpleToggle = () => {
     return (
-      <div className="flex gap-4 items-center my-20 text-[#111927] text-lg leading-5">
+      <div className="flex gap-4 items-center my-20 text-text-heading text-lg leading-5">
         <button
           onClick={() => {
             if (!isMonthly) {
@@ -50,11 +50,8 @@ export default function Pricing() {
 
   return (
     <div
-      className="w-full flex flex-col items-center py-20"
+      className="w-full flex flex-col items-center py-20 section-anchor"
       id="pricing"
-      style={{
-        scrollMarginTop: "100px",
-      }}
     >
       <div className="max-w-content w-full">
         <h1 className="section-header">{t("title")}</h1>
@@ -278,18 +275,18 @@ export default function Pricing() {
             />
           </>
         )}
-        <div className="flex-1 rounded-xl bg-white shadow-lg p-8 flex flex-col gap-12">
+        <div className="card-elevated flex-1 gap-12">
           <div>
             <h4 className="text-primary text-sm font-semibold leading-6 tracking-wide uppercase">
               Custom
             </h4>
-            <p className="text-[#161C2D] leading-5 mt-2 opacity-70">
+            <p className="text-text-muted leading-5 mt-2 opacity-70">
               Looking for more? Contact Us.
             </p>
           </div>
           <div className="flex-1" />
           <div>
-            <button className="hover:shadow-md border border-[#3375a980] rounded-xl py-2 px-6 text-primary font-medium leading-7">
+            <button className="btn-outline">
               Contact us
             </button>
           </div>
@@ -318,22 +315,22 @@ const Plan = ({
   items: PlanItem[];
 }) => {
   return (
-    <div className="flex-1 rounded-xl bg-white shadow-lg p-8 flex flex-col gap-6">
+    <div className="card-elevated flex-1 gap-6">
       <div>
         <h4 className="text-secondary text-sm font-semibold leading-6 tracking-wide uppercase">
           {label}
         </h4>
       </div>
       <div>
-        <div className="text-[#111927] text-xl font-bold mb-2">OMR</div>
-        <span className="text-[#111927] text-5xl font-bold">{price}</span>
-        <span className="text-[#111927] text-base">
+        <div className="text-text-heading text-xl font-bold mb-2">OMR</div>
+        <span className="text-text-heading text-5xl font-bold">{price}</span>
+        <span className="text-text-heading text-base">
           / {isAnnual ? "year" : "month"}
         </span>
       </div>
       <p
         className={clsx({
-          "text-[#161C2D] leading-5 opacity-70": true,
+          "text-text-muted leading-5 opacity-70": true,
           "text-transparent": !description,
         })}
       >
@@ -346,8 +343,8 @@ const Plan = ({
               key={index}
               className={clsx({
                 "flex gap-3 leading-6": true,
-                "text-[#111927]": item.available,
-                "text-[#11192761]": !item.available,
+                "text-text-heading": item.available,
+                "text-text-disabled": !item.available,
               })}
             >
               <Image
@@ -361,7 +358,7 @@ const Plan = ({
       </div>
       <div className="flex-1" />
       <div>
-        <button className="bg-secondary hover:bg-opacity-90 shadow-md hover:shadow-lg rounded-xl py-2 px-6 text-white font-medium leading-7">
+        <button className="btn-primary">
           Get started
         </button>
       </div>

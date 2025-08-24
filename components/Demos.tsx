@@ -25,15 +25,15 @@ export default function Demos({ locale }: LocaleProps) {
     list: string[];
   }) => {
     return (
-      <div className="group border border-[#E5E7EB] rounded-xl px-11 py-6 hover:border-primary-light hover:bg-primary-lightest hover:shadow-sm transition-all duration-200">
+      <div className="group border border-gray-200 rounded-xl px-11 py-6 hover:border-primary-light hover:bg-primary-lightest hover:shadow-sm interactive-hover">
         <Image src={icon} alt={`${title} icon`} />
-        <h3 className="text-[#111927] group-hover:text-primary text-2xl font-medium leading-7 mt-6 transition-all duration-200">
+        <h3 className="text-text-heading group-hover:text-primary text-2xl font-medium leading-7 mt-6 interactive-hover">
           {title}
         </h3>
         <ul className="mt-3">
           {list.map((child, index) => {
             return (
-              <li key={index} className="text-[#6C737F] leading-6">
+              <li key={index} className="text-text-body leading-6">
                 {child}
               </li>
             );
@@ -41,7 +41,7 @@ export default function Demos({ locale }: LocaleProps) {
         </ul>
 
         <button
-          className="mt-8 text-secondary border border-[#ef6c0080] hover:shadow-md rounded-xl px-6 py-3 flex gap-2 items-center transition-shadow duration-200"
+          className="mt-8 text-secondary border border-secondary border-opacity-50 hover:shadow-md rounded-xl px-6 py-3 flex gap-2 items-center interactive-hover"
           type="button"
         >
           Open demo
@@ -61,9 +61,7 @@ export default function Demos({ locale }: LocaleProps) {
     <div
       className="w-full flex justify-center bg-white py-20"
       id="demos"
-      style={{
-        scrollMarginTop: "80px",
-      }}
+style={{ scrollMarginTop: "80px" }}
     >
       <div className="max-w-content w-full">
         <h1 className="section-header">{t("title")}</h1>

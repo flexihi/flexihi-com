@@ -6,17 +6,65 @@
 }
 
 @theme inline {
+  /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: #005394;
   --color-primary-light: #3375a9;
   --color-primary-lightest: #f5f7ff;
+  --color-secondary: #ef6c00;
+  --color-white: #ffffff;
+  
+  /* Semantic text colors */
   --color-text-primary: #111927;
   --color-text-secondary: #6c737f;
-  --color-secondary: #ef6c00;
+  --color-text-heading: #111927;
+  --color-text-body: #6c737f;
+  --color-text-muted: #161c2d;
+  --color-text-disabled: #11192761;
+  
+  /* Surface colors */
+  --color-surface-background: #f5f7ff;
+  --color-surface-elevated: #ffffff;
+  --color-surface-accent: #ff9800;
+  --color-accent: #ff9800;
+  
+  /* Shadow system */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Radius system */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+  
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  
+  /* Typography */
   --font-bukra: var(--font-bukra);
+  
+  /* Layout */
   --max-width-content: 1440px;
   --margin-nav-bar: 94px;
+  --section-scroll-margin: 100px;
+  
+  /* Transitions */
+  --transition-fast: 200ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
 }
 
 html {
@@ -52,6 +100,131 @@ body {
   font-size: 1.125rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
+}
+
+/* Section anchor for smooth scroll with navbar offset */
+.section-anchor {
+  scroll-margin-top: var(--section-scroll-margin);
+}
+
+/* Button variants */
+.btn-primary {
+  background-color: var(--color-secondary);
+  color: white;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-md);
+  font-weight: 500;
+  line-height: 1.75rem;
+  transition: all var(--transition-fast) ease-in-out;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all var(--transition-fast) ease-in-out;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 1.75rem;
+}
+
+.btn-secondary:hover {
+  box-shadow: var(--shadow-lg);
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid rgba(51, 117, 169, 0.5);
+  border-radius: 0.75rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  line-height: 1.75rem;
+  transition: all var(--transition-fast) ease-in-out;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn-icon {
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  background-color: var(--color-primary-light);
+  background-opacity: 0;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all var(--transition-fast) ease-in-out;
+  cursor: pointer;
+}
+
+.btn-icon:hover {
+  background-color: rgba(51, 117, 169, 0.1);
+}
+
+/* Card variants */
+.card-elevated {
+  border-radius: 0.75rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-surface {
+  border-radius: 0.75rem;
+  background-color: var(--color-surface-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Interactive elements */
+.interactive-hover {
+  transition: all var(--transition-fast) ease-in-out;
+}
+
+.interactive-hover:hover {
+  transform: translateY(-1px);
+}
+
+/* Link hover effects */
+.link-hover {
+  transition: color var(--transition-fast) ease-in-out;
+}
+
+.link-hover:hover {
+  color: var(--color-secondary);
+}
+
+/* Focus states */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* @media (prefers-color-scheme: dark) {

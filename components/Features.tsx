@@ -21,8 +21,12 @@ import {
   Pagination,
   Thumbs,
 } from "swiper/modules";
-// TODO: replace with module imports: https://swiperjs.com/react
-import "swiper/css/bundle";
+// Import only the CSS modules we need instead of the full bundle
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/a11y";
+import "swiper/css/keyboard";
 import { useState } from "react";
 import LocaleProps from "@/types/LocaleProps";
 import { useTranslations } from "next-intl";
@@ -82,11 +86,8 @@ export default function Features({ locale }: LocaleProps) {
 
   return (
     <div
-      className="w-full flex justify-center mb-20"
+      className="w-full flex justify-center mb-20 section-anchor"
       id="features"
-      style={{
-        scrollMarginTop: "100px",
-      }}
     >
       <div className="max-w-content w-full">
         <h1 className="section-header">{t("title")}</h1>
@@ -130,7 +131,7 @@ export default function Features({ locale }: LocaleProps) {
                               }
                             }}
                             type="button"
-                            className="border border-primary rounded-full bg-primary-light bg-opacity-0 p-4 flex justify-center items-center hover:bg-opacity-10 transition-all duration-200"
+                            className="btn-icon"
                           >
                             <Image
                               src={locale === "en" ? arrowBack : arrowForward}
@@ -147,7 +148,7 @@ export default function Features({ locale }: LocaleProps) {
                               }
                             }}
                             type="button"
-                            className="border border-primary rounded-full bg-primary-light bg-opacity-0 p-4 flex justify-center items-center hover:bg-opacity-10 transition-all duration-200"
+                            className="btn-icon"
                           >
                             <Image
                               src={locale === "en" ? arrowForward : arrowBack}

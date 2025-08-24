@@ -15,21 +15,23 @@ export const metadata: Metadata = {
 const Bukra = localFont({
   variable: "--font-bukra",
   src: [
-    {
-      path: "../public/fonts/29LT-Bukra-Thin.otf",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/29LT-Bukra-Extra-Light.otf",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/29LT-Bukra-Light.otf",
-      weight: "300",
-      style: "normal",
-    },
+    // Commented out unused font weights for better performance
+    // Uncomment as needed when designing new components
+    // {
+    //   path: "../public/fonts/29LT-Bukra-Thin.otf",
+    //   weight: "100",
+    //   style: "normal",
+    // },
+    // {
+    //   path: "../public/fonts/29LT-Bukra-Extra-Light.otf",
+    //   weight: "200",
+    //   style: "normal",
+    // },
+    // {
+    //   path: "../public/fonts/29LT-Bukra-Light.otf",
+    //   weight: "300",
+    //   style: "normal",
+    // },
     {
       path: "../public/fonts/29LT-Bukra-Regular.otf",
       weight: "400",
@@ -50,16 +52,16 @@ const Bukra = localFont({
       weight: "700",
       style: "normal",
     },
-    {
-      path: "../public/fonts/29LT-Bukra-Extra-Bold.otf",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/29LT-Bukra-Black.otf",
-      weight: "900",
-      style: "normal",
-    },
+    // {
+    //   path: "../public/fonts/29LT-Bukra-Extra-Bold.otf",
+    //   weight: "800",
+    //   style: "normal",
+    // },
+    // {
+    //   path: "../public/fonts/29LT-Bukra-Black.otf",
+    //   weight: "900",
+    //   style: "normal",
+    // },
   ],
 });
 

@@ -40,7 +40,7 @@ export default function FAQs() {
     // }, [isOpen]);
 
     return (
-      <li className='border-b border-[#E2E8F0] py-8'>
+      <li className='border-b border-gray-200 py-8'>
         <header
           role='button'
           onClick={() => setSelected(isOpen ? null : index)}
@@ -92,11 +92,8 @@ export default function FAQs() {
 
   return (
     <div
-      className='w-full flex justify-center bg-white py-20'
+      className='w-full flex justify-center bg-white py-20 section-anchor'
       id='faqs'
-      style={{
-        scrollMarginTop: '80px',
-      }}
     >
       <div className='max-w-content w-full px-20'>
         <h1 className='section-header'>{t('title')}</h1>
