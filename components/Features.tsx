@@ -115,12 +115,6 @@ export default function Features({ locale }: LocaleProps) {
                       </p>
                       <div className="flex justify-between items-center">
                         <div className="flex gap-4">
-                          {/* 
-                        className={clsx({
-                            "flex gap-4": true,
-                            "flex-row": locale === "en",
-                            "flex-row-reverse": locale === "ar",
-                          })} */}
                           <button
                             onClick={() => {
                               if (!swiper) return;
@@ -134,8 +128,9 @@ export default function Features({ locale }: LocaleProps) {
                             className="btn-icon"
                           >
                             <Image
-                              src={locale === "en" ? arrowBack : arrowForward}
-                              alt="back arrow"
+                              src={arrowBack}
+                              alt="previous slide"
+                              className={locale === "ar" ? "scale-x-[-1]" : ""}
                             />
                           </button>
                           <button
@@ -151,8 +146,9 @@ export default function Features({ locale }: LocaleProps) {
                             className="btn-icon"
                           >
                             <Image
-                              src={locale === "en" ? arrowForward : arrowBack}
-                              alt="forward arrow"
+                              src={arrowForward}
+                              alt="next slide"
+                              className={locale === "ar" ? "scale-x-[-1]" : ""}
                             />
                           </button>
                         </div>

@@ -10,7 +10,7 @@ export default function Apps() {
   return (
     <div className="w-full flex justify-center bg-primary-light text-white">
       <div className="max-w-content w-full flex justify-between">
-        <div className="flex flex-col gap-8 pl-20 py-20">
+        <div className="flex flex-col gap-8 ps-20 py-20">
           <h5 className="text-3xl font-bold leading-9">{t("title")}</h5>
           <p className="leading-8">{t("description")}</p>
 

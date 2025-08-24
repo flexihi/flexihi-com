@@ -78,7 +78,7 @@
   },
   "FAQs": {
     "title": "Frequently Asked Questions",
-    "description": "Description Description Description Description Description Description Description",
+    "description": "Find answers to commonly asked questions about FlexiHi's inventory and sales management system.",
     "0": {
       "question": "What kind of hardware can work with FlexiHi POS software?",
       "answer": "The FlexiHi POS software can work with barcode scanners, receipt printers, cash drawers, and other similar hardware. You can use it on iPads and Android tablets, but they need to meet certain requirements. For more details, you can contact the sales team."

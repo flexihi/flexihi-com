@@ -1,23 +1,30 @@
-"use client";
+'use client';
 
-import LocaleProps from "@/types/LocaleProps";
-import { setCookie } from "cookies-next";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import LocaleProps from '@/types/LocaleProps';
+import { setCookie } from 'cookies-next';
+import { useTranslations } from 'next-intl';
 
 export default function LangSwitchButton({ locale }: LocaleProps) {
-  const router = useRouter();
-
-  const cb = () => {
-    setCookie("lang", locale === "en" ? "ar" : "en");
-    router.refresh();
+  const handleLanguageSwitch = () => {
+    const newLocale = locale === 'en' ? 'ar' : 'en';
+    
+    // Set cookie with proper expiration
+    setCookie('locale', newLocale, {
+      maxAge: 30 * 24 * 60 * 60, // 30 days
+      sameSite: 'lax',
+    });
+    
+    // Force a full page reload to ensure all components re-render with new locale
+    window.location.reload();
   };
 
-  const t = useTranslations("NavBar");
+  const t = useTranslations('NavBar');
 
   return (
-    <li className="font-medium leading-6 ps-6 hover:text-primary transition-colors duration-200">
-      <button onClick={cb}>{t("lang")}</button>
+    <li className='font-medium leading-6 ps-6'>
+      <button onClick={handleLanguageSwitch}>
+        {t('lang')}
+      </button>
     </li>
   );
 }
