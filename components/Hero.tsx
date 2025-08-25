@@ -18,16 +18,15 @@ const HeroButtons = memo(function HeroButtons({
   t: (key: string) => string;
 }) {
   return (
-    <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4 sm:mt-2 md:mt-1'>
+    <div className='flex flex-wrap gap-3 mt-4 sm:mt-2 md:mt-1 justify-center lg:justify-start'>
       <a
         href={`${process.env.NEXT_PUBLIC_BACK_OFFICE_URL}`}
         target='_blank'
         rel='noopener noreferrer'
         aria-label='Start using FlexiHi platform'
-        className='w-full sm:w-auto'
       >
         <button
-          className='btn-primary focus-ring w-full sm:w-auto'
+          className='btn-primary focus-ring min-w-[140px] px-6'
           type='button'
         >
           {t('buttons.start')}
@@ -36,10 +35,9 @@ const HeroButtons = memo(function HeroButtons({
       <Link
         href='/#demos'
         aria-label='View product demos'
-        className='w-full sm:w-auto'
       >
         <button
-          className='btn-secondary focus-ring w-full sm:w-auto'
+          className='btn-secondary focus-ring min-w-[140px] px-6'
           type='button'
         >
           {t('buttons.demos')}
@@ -110,7 +108,7 @@ function Hero({ locale }: LocaleProps) {
       {/* Main content */}
       <div className='relative w-full max-w-content h-full mt-20 md:mt-32 lg:mt-40'>
         <div className='relative flex flex-col lg:flex-row gap-8 lg:gap-4 justify-between items-center px-4 md:px-6 lg:px-10'>
-          <div className='flex flex-col gap-4 flex-1 w-full lg:w-auto'>
+          <div className='flex flex-col gap-4 flex-1 w-full lg:w-auto text-center lg:text-start'>
             <h2 className={subtitleClass}>{t('subtitle')}</h2>
             <h1 className='text-primary text-3xl md:text-4xl lg:text-5xl font-bold leading-snug'>
               {t('title')}
@@ -122,14 +120,14 @@ function Hero({ locale }: LocaleProps) {
           </div>
 
           {/* Responsive chart image */}
-          <div className='flex flex-col gap-4 w-full lg:w-auto lg:flex-shrink-0'>
+          <div className='flex flex-col gap-4 w-full lg:w-auto lg:flex-shrink-0 items-center'>
             <Image
               src={chartImage}
               alt='FlexiHi analytics chart showing business performance metrics'
               priority
               width={700}
               height={525}
-              className='object-contain w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl'
+              className='object-contain w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto lg:mx-0'
               sizes='(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 700px'
             />
           </div>
