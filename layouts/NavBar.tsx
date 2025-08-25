@@ -9,6 +9,7 @@ import { HiMenu } from 'react-icons/hi';
 import LangSwitchButton from "./LangSwitchButton";
 import MobileMenu from "./components/MobileMenu";
 import ContactIcons from "./components/ContactIcons";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { NAVIGATION_SECTIONS, EXTERNAL_LINKS } from './constants';
 import LocaleProps from "@/types/LocaleProps";
 
@@ -26,7 +27,13 @@ export default function NavBar({ locale }: LocaleProps) {
               href="/"
               className="hover:opacity-80 transition-opacity duration-200"
             >
-              <Image src={logo} alt="flexihi logo" className="me-14" />
+              <Image 
+                src={logo} 
+                alt="flexihi logo" 
+                className="me-14" 
+                priority 
+                sizes="(max-width: 768px) 120px, 140px"
+              />
             </Link>
             <li className="font-medium leading-6 mx-1 hover:text-secondary transition-colors duration-200">
               <Link href={NAVIGATION_SECTIONS.features}>{t("features")}</Link>
@@ -38,7 +45,9 @@ export default function NavBar({ locale }: LocaleProps) {
               <Link href={NAVIGATION_SECTIONS.faqs}>{t("faqs")}</Link>
             </li>
             <div className="px-3">|</div>
-            <ContactIcons />
+            <ErrorBoundary fallback={<div className="text-xs text-red-500">Contact icons unavailable</div>}>
+              <ContactIcons />
+            </ErrorBoundary>
           </ul>
 
           {/* Mobile Logo */}
@@ -47,7 +56,13 @@ export default function NavBar({ locale }: LocaleProps) {
               href="/"
               className="hover:opacity-80 transition-opacity duration-200"
             >
-              <Image src={logo} alt="flexihi logo" className="h-8 w-auto" />
+              <Image 
+                src={logo} 
+                alt="flexihi logo" 
+                className="h-8 w-auto" 
+                priority 
+                sizes="120px"
+              />
             </Link>
           </div>
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import callIcon from '@/public/call-icon.svg';
 import whatsappIcon from '@/public/whatsapp-icon.svg';
@@ -9,7 +10,10 @@ interface ContactIconsProps {
   iconClassName?: string;
 }
 
-export default function ContactIcons({ className = "flex gap-1", iconClassName = "mx-1" }: ContactIconsProps) {
+const ContactIcons = React.memo<ContactIconsProps>(function ContactIcons({ 
+  className = "flex gap-1", 
+  iconClassName = "mx-1" 
+}) {
   return (
     <div className={className}>
       <a 
@@ -25,6 +29,7 @@ export default function ContactIcons({ className = "flex gap-1", iconClassName =
           width={24}
           height={24}
           className={iconClassName}
+          loading="lazy"
         />
       </a>
       <a
@@ -40,6 +45,7 @@ export default function ContactIcons({ className = "flex gap-1", iconClassName =
           width={24}
           height={24}
           className={iconClassName}
+          loading="lazy"
         />
       </a>
       <a
@@ -55,8 +61,11 @@ export default function ContactIcons({ className = "flex gap-1", iconClassName =
           width={24}
           height={24}
           className={iconClassName}
+          loading="lazy"
         />
       </a>
     </div>
   );
-}
+});
+
+export default ContactIcons;

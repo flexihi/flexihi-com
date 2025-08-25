@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import youtubeIcon from '@/public/youtube.svg';
 import facebookIcon from '@/public/facebook.svg';
@@ -10,12 +11,12 @@ interface SocialLinksProps {
   layout?: 'horizontal' | 'vertical';
 }
 
-export default function SocialLinks({ 
+const SocialLinks = React.memo<SocialLinksProps>(function SocialLinks({ 
   className = "", 
   layout = 'horizontal' 
-}: SocialLinksProps) {
+}) {
   const baseClasses = layout === 'horizontal' ? 'flex gap-4 items-center' : 'flex flex-col gap-4 items-start';
-  const finalClassName = `${baseClasses} ${className}`;
+  const finalClassName = `${baseClasses} ${className}`.trim();
 
   return (
     <div className={finalClassName}>
@@ -26,7 +27,7 @@ export default function SocialLinks({
         className="hover:opacity-80 transition-opacity duration-200"
         aria-label="YouTube"
       >
-        <Image src={youtubeIcon} alt="youtube" />
+        <Image src={youtubeIcon} alt="youtube" loading="lazy" width={24} height={24} />
       </a>
       <a
         href={SOCIAL_LINKS.facebook}
@@ -35,7 +36,7 @@ export default function SocialLinks({
         className="hover:opacity-80 transition-opacity duration-200"
         aria-label="Facebook"
       >
-        <Image src={facebookIcon} alt="facebook" />
+        <Image src={facebookIcon} alt="facebook" loading="lazy" width={24} height={24} />
       </a>
       <a
         href={SOCIAL_LINKS.twitter}
@@ -44,7 +45,7 @@ export default function SocialLinks({
         className="hover:opacity-80 transition-opacity duration-200"
         aria-label="Twitter"
       >
-        <Image src={twitterIcon} alt="twitter" />
+        <Image src={twitterIcon} alt="twitter" loading="lazy" width={24} height={24} />
       </a>
       <a
         href={SOCIAL_LINKS.instagram}
@@ -53,8 +54,10 @@ export default function SocialLinks({
         className="hover:opacity-80 transition-opacity duration-200"
         aria-label="Instagram"
       >
-        <Image src={instagramIcon} alt="instagram" />
+        <Image src={instagramIcon} alt="instagram" loading="lazy" width={24} height={24} />
       </a>
     </div>
   );
-}
+});
+
+export default SocialLinks;

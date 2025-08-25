@@ -1,7 +1,7 @@
 'use client';
 
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -18,6 +18,28 @@ interface MobileMenuProps extends LocaleProps {
 
 export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps) {
   const t = useTranslations('NavBar');
+
+  // Enhanced keyboard navigation
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (!isOpen) return;
+
+    switch (event.key) {
+      case 'Escape':
+        event.preventDefault();
+        onClose();
+        break;
+      case 'Tab':
+        // Let headless UI handle focus trap
+        break;
+      default:
+        break;
+    }
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <Transition show={isOpen} as={Fragment}>
@@ -51,7 +73,13 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
                     <div className="px-4 py-6 sm:px-6">
                       <div className="flex items-center justify-between">
                         <Link href="/" onClick={onClose}>
-                          <Image src={logo} alt="flexihi logo" className="h-8 w-auto" />
+                          <Image 
+                            src={logo} 
+                            alt="flexihi logo" 
+                            className="h-8 w-auto" 
+                            loading="lazy"
+                            sizes="120px"
+                          />
                         </Link>
                         <button
                           type="button"
@@ -69,21 +97,21 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
                         <div className="flex flex-col space-y-6">
                           <Link
                             href={NAVIGATION_SECTIONS.features}
-                            className="text-text-primary hover:text-secondary transition-colors duration-200 font-medium text-lg"
+                            className="text-text-primary hover:text-secondary focus:text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
                             onClick={onClose}
                           >
                             {t('features')}
                           </Link>
                           <Link
                             href={NAVIGATION_SECTIONS.pricing}
-                            className="text-text-primary hover:text-secondary transition-colors duration-200 font-medium text-lg"
+                            className="text-text-primary hover:text-secondary focus:text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
                             onClick={onClose}
                           >
                             {t('pricing')}
                           </Link>
                           <Link
                             href={NAVIGATION_SECTIONS.faqs}
-                            className="text-text-primary hover:text-secondary transition-colors duration-200 font-medium text-lg"
+                            className="text-text-primary hover:text-secondary focus:text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
                             onClick={onClose}
                           >
                             {t('faqs')}
@@ -96,7 +124,7 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
                               href={EXTERNAL_LINKS.backOffice}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-secondary hover:text-primary transition-colors duration-200 font-medium text-lg"
+                              className="text-secondary hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
                               onClick={onClose}
                             >
                               {t('login')}
@@ -105,7 +133,7 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
                               href={EXTERNAL_LINKS.backOffice}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="btn-primary text-center"
+                              className="btn-primary text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                               onClick={onClose}
                             >
                               {t('signUp')}
