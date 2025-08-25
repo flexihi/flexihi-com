@@ -111,5 +111,15 @@
   "Apps": {
     "title": "عززّ مبيعاتك مع FlexiHI!",
     "description": "قم بتحميل التطبيق الآن  عبر متجر Google Plya  أو Apple Store"
+  },
+  "Footer": {
+    "affiliate": "تريد أن تصبح شريكًا؟",
+    "contactUs": "اتصل بنا",
+    "termsConditions": "الشروط والأحكام",
+    "privacyPolicy": "سياسة الخصوصية",
+    "refundPolicy": "سياسة الاسترداد",
+    "backOffice": "مكتب خلفي",
+    "copyright": "© {year} FlexiHi. جميع الحقوق محفوظة",
+    "getApp": "احصل على التطبيق"
   }
 }

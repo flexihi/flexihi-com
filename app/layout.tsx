@@ -86,7 +86,7 @@ export default async function RootLayout({
           <div className="flex h-screen min-h-screen flex-col">
             <NavBar locale={locale} />
             <main className="flex-1">{children}</main>
-            <Footer />
+            <Footer locale={locale} />
           </div>
         </NextIntlClientProvider>
       </body>

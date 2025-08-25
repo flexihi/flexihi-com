@@ -111,5 +111,15 @@
   "Apps": {
     "title": "Enhance your sales process with FlexiHI!",
     "description": "Download our app today from Google Play or Apple Store"
+  },
+  "Footer": {
+    "affiliate": "Want to become an affiliate?",
+    "contactUs": "Contact us",
+    "termsConditions": "Terms & conditions",
+    "privacyPolicy": "Privacy Policy",
+    "refundPolicy": "Refund Policy",
+    "backOffice": "Back office",
+    "copyright": "© {year} FlexiHi. All rights reserved",
+    "getApp": "Get the App"
   }
 }
