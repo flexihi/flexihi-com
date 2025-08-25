@@ -11,21 +11,14 @@ import featureImage7 from "@/public/features-7.svg";
 import featureImage8 from "@/public/features-8.svg";
 import arrowForward from "@/public/features-arrow-forward.svg";
 import arrowBack from "@/public/features-arrow-back.svg";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType } from "swiper";
 import {
-  A11y,
-  Keyboard,
-  Navigation,
-  Pagination,
-} from "swiper/modules";
-// Import only the CSS modules we actually need
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/a11y";
-import { memo, useCallback, useMemo, useRef } from "react";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { memo, useCallback, useMemo, useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import type { CarouselApi } from "@/components/ui/carousel";
 
 // Constants for better maintainability
 const TOTAL_FEATURES = 8;
@@ -49,14 +42,7 @@ interface NavigationControlsProps {
   locale: string;
 }
 
-interface FeatureSlideProps {
-  feature: FeatureProps;
-  onPrevious: () => void;
-  onNext: () => void;
-  locale: string;
-}
-
-// Memoized navigation controls component
+// Custom navigation controls with fixed positioning
 const NavigationControls = memo(function NavigationControls({
   onPrevious,
   onNext,
@@ -67,7 +53,7 @@ const NavigationControls = memo(function NavigationControls({
   const arrowClassName = locale === "ar" ? "scale-x-[-1]" : "";
   
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center mt-6">
       <div className="flex gap-4">
         <button
           onClick={onPrevious}
@@ -108,47 +94,10 @@ const NavigationControls = memo(function NavigationControls({
   );
 });
 
-// Memoized feature slide component
-const FeatureSlide = memo(function FeatureSlide({
-  feature,
-  onPrevious,
-  onNext,
-  locale,
-}: FeatureSlideProps) {
-  return (
-    <article className="w-full flex gap-8 justify-center items-center">
-      <div className="max-w-[540px] flex flex-col gap-6">
-        <h4 className="text-text-primary text-2xl font-bold leading-8 whitespace-pre-line">
-          {feature.title}
-        </h4>
-        <p className="text-text-secondary leading-8 text-justify">
-          {feature.desc}
-        </p>
-        <NavigationControls
-          onPrevious={onPrevious}
-          onNext={onNext}
-          currentSlide={feature.index}
-          totalSlides={TOTAL_FEATURES}
-          locale={locale}
-        />
-      </div>
-      <div className="relative w-1/2 flex justify-center">
-        <Image
-          src={feature.image}
-          alt={`${feature.title} example`}
-          className="object-contain"
-          width={600}
-          height={400}
-          priority={feature.index === 0}
-          loading={feature.index === 0 ? "eager" : "lazy"}
-        />
-      </div>
-    </article>
-  );
-});
 
 function Features() {
-  const swiperRef = useRef<SwiperType>();
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
   const t = useTranslations("Features");
   const locale = useLocale();
 
@@ -162,18 +111,25 @@ function Features() {
     }));
   }, [t]);
 
-  // Optimized navigation handlers with useCallback
-  const handlePrevious = useCallback((currentIndex: number) => {
-    if (!swiperRef.current) return;
-    const targetIndex = currentIndex === 0 ? TOTAL_FEATURES - 1 : currentIndex - 1;
-    swiperRef.current.slideTo(targetIndex);
-  }, []);
+  // Track current slide
+  useEffect(() => {
+    if (!api) return;
 
-  const handleNext = useCallback((currentIndex: number) => {
-    if (!swiperRef.current) return;
-    const targetIndex = (currentIndex + 1) % TOTAL_FEATURES;
-    swiperRef.current.slideTo(targetIndex);
-  }, []);
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  // Navigation handlers
+  const handlePrevious = useCallback(() => {
+    api?.scrollPrev();
+  }, [api]);
+
+  const handleNext = useCallback(() => {
+    api?.scrollNext();
+  }, [api]);
 
   return (
     <section
@@ -185,39 +141,84 @@ function Features() {
         <h1 className="section-header">{t("title")}</h1>
         <p className="section-description">{t("description")}</p>
 
-        <div role="region" aria-label="Features carousel" className="overflow-x-hidden">
-          <Swiper
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
+        <div role="region" aria-label="Features carousel" className="relative w-full">
+          <Carousel
+            setApi={setApi}
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
             }}
-            modules={[Navigation, Keyboard, Pagination, A11y]}
-            pagination={{
-              enabled: true,
-              clickable: true,
-            }}
-            keyboard={{
-              enabled: true,
-              onlyInViewport: true,
-            }}
-            a11y={{
-              prevSlideMessage: 'Previous feature',
-              nextSlideMessage: 'Next feature',
-              slideLabelMessage: 'Feature {{index}} of {{slidesLength}}',
-            }}
-            loop={true}
-            lazy={true}
           >
-            {slidesList.map((slide) => (
-              <SwiperSlide key={slide.index} className="pt-10 pb-20">
-                <FeatureSlide
-                  feature={slide}
-                  onPrevious={() => handlePrevious(slide.index)}
-                  onNext={() => handleNext(slide.index)}
-                  locale={locale}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+            <CarouselContent className="-ml-4">
+              {slidesList.map((slide) => (
+                <CarouselItem key={slide.index} className="pt-10 pb-20 pl-4 basis-full">
+                  <article className="w-full">
+                    {/* Mobile Layout - Stacked */}
+                    <div className="lg:hidden flex flex-col gap-8 items-center">
+                      <div className="w-full max-w-md">
+                        <Image
+                          src={slide.image}
+                          alt={`${slide.title} example`}
+                          className="object-contain w-full h-auto"
+                          width={400}
+                          height={300}
+                          priority={slide.index === 0}
+                          loading={slide.index === 0 ? "eager" : "lazy"}
+                        />
+                      </div>
+                      <div className="w-full max-w-lg text-center">
+                        <h4 className="text-text-primary text-2xl font-bold leading-8 whitespace-pre-line mb-4">
+                          {slide.title}
+                        </h4>
+                        <p className="text-text-secondary leading-8 mb-6">
+                          {slide.desc}
+                        </p>
+                        <NavigationControls
+                          onPrevious={handlePrevious}
+                          onNext={handleNext}
+                          currentSlide={current}
+                          totalSlides={TOTAL_FEATURES}
+                          locale={locale}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Desktop Layout - Side by Side */}
+                    <div className="hidden lg:flex gap-8 justify-center items-start max-w-full">
+                      <div className="max-w-[540px] flex flex-col min-h-[400px]">
+                        <h4 className="text-text-primary text-2xl font-bold leading-8 whitespace-pre-line mb-6">
+                          {slide.title}
+                        </h4>
+                        <p className="text-text-secondary leading-8 text-justify mb-auto">
+                          {slide.desc}
+                        </p>
+                        <NavigationControls
+                          onPrevious={handlePrevious}
+                          onNext={handleNext}
+                          currentSlide={current}
+                          totalSlides={TOTAL_FEATURES}
+                          locale={locale}
+                        />
+                      </div>
+                      <div className="relative w-1/2 flex justify-center">
+                        <Image
+                          src={slide.image}
+                          alt={`${slide.title} example`}
+                          className="object-contain"
+                          width={600}
+                          height={400}
+                          priority={slide.index === 0}
+                          loading={slide.index === 0 ? "eager" : "lazy"}
+                        />
+                      </div>
+                    </div>
+                  </article>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
     </section>
