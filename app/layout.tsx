@@ -126,9 +126,9 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={locale === 'en' ? 'ltr' : 'rtl'}
-      className={Bukra.variable}
+      className={`${Bukra.variable} overflow-x-hidden`}
     >
-      <body>
+      <body className="overflow-x-hidden">
         <NextIntlClientProvider messages={messages}>
           <div className='flex min-h-screen flex-col'>
             <NavBar locale={locale} />

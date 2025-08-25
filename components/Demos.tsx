@@ -118,7 +118,7 @@ function Demos() {
 
   return (
     <section
-      className="w-full flex justify-center bg-white py-20 section-anchor"
+      className="w-full flex justify-center bg-white py-20 section-anchor overflow-x-hidden"
       id="demos"
       aria-label="FlexiHi demo showcase for different business types"
     >

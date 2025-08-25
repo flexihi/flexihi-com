@@ -177,15 +177,15 @@ function Features() {
 
   return (
     <section
-      className="w-full flex justify-center mb-20 section-anchor"
+      className="w-full flex justify-center mb-20 section-anchor overflow-x-hidden"
       id="features"
       aria-label="FlexiHi product features showcase"
     >
-      <div className="max-w-content w-full">
+      <div className="max-w-content w-full overflow-x-hidden">
         <h1 className="section-header">{t("title")}</h1>
         <p className="section-description">{t("description")}</p>
 
-        <div role="region" aria-label="Features carousel">
+        <div role="region" aria-label="Features carousel" className="overflow-x-hidden">
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;

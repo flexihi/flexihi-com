@@ -35,7 +35,7 @@ function FAQs() {
 
   return (
     <section
-      className='w-full flex justify-center bg-white py-20 section-anchor'
+      className='w-full flex justify-center bg-white py-20 section-anchor overflow-x-hidden'
       id='faqs'
       aria-label='Frequently asked questions about FlexiHi'
     >

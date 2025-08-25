@@ -263,7 +263,7 @@ function Pricing() {
 
   return (
     <section
-      className="w-full flex flex-col items-center py-20 section-anchor"
+      className="w-full flex flex-col items-center py-20 section-anchor overflow-x-hidden"
       id="pricing"
       aria-label="FlexiHi pricing plans and subscription options"
     >

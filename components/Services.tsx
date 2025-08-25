@@ -76,7 +76,7 @@ function Services() {
 
   return (
     <section 
-      className="w-full bg-secondary/[0.04] flex justify-center"
+      className="w-full bg-secondary/[0.04] flex justify-center overflow-x-hidden"
       aria-label="FlexiHi services and support offerings"
     >
       <div className="max-w-content w-full py-24 px-28">

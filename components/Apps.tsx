@@ -71,7 +71,7 @@ function Apps() {
 
   return (
     <section 
-      className="w-full flex justify-center bg-primary-light text-white"
+      className="w-full flex justify-center bg-primary-light text-white overflow-x-hidden"
       role="region"
       aria-label="FlexiHi mobile app download section"
     >
