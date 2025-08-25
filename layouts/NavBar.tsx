@@ -54,25 +54,25 @@ export default function NavBar({ locale }: LocaleProps) {
 
             {/* Mobile Header */}
             <div className="flex md:hidden w-full items-center justify-between py-4">
-              {/* Hamburger Menu */}
-              <HamburgerIcon 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              />
-              
-              {/* Logo */}
-              <Link
-                href="/"
-                className="hover:opacity-80 transition-opacity duration-200"
-              >
-                <Image 
-                  src={logo} 
-                  alt="flexihi logo" 
-                  className="h-8 w-auto" 
-                  priority 
-                  sizes="120px"
+              {/* Hamburger Menu + Logo */}
+              <div className="flex items-center gap-3">
+                <HamburgerIcon 
+                  isOpen={isMobileMenuOpen} 
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 />
-              </Link>
+                <Link
+                  href="/"
+                  className="hover:opacity-80 transition-opacity duration-200"
+                >
+                  <Image 
+                    src={logo} 
+                    alt="flexihi logo" 
+                    className="h-8 w-auto" 
+                    priority 
+                    sizes="120px"
+                  />
+                </Link>
+              </div>
               
               {/* Sign Up Button */}
               <a
