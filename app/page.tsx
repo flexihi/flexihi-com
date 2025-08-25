@@ -1,26 +1,46 @@
-import Apps from "@/components/Apps";
-import Demos from "@/components/Demos";
-import FAQs from "@/components/FAQs";
-import Features from "@/components/Features";
-import Hero from "@/components/Hero";
-import Pricing from "@/components/Pricing";
-import Services from "@/components/Services";
-import { LocaleType } from "@/types/LocaleProps";
-import { getLocale } from "next-intl/server";
+import { Suspense, lazy } from 'react';
+import Features from '@/components/Features';
+import Hero from '@/components/Hero';
+import getAppLocale from '@/utils/getAppLocale';
+
+const Services = lazy(() => import('@/components/Services'));
+const Demos = lazy(() => import('@/components/Demos'));
+const Pricing = lazy(() => import('@/components/Pricing'));
+const FAQs = lazy(() => import('@/components/FAQs'));
+const Apps = lazy(() => import('@/components/Apps'));
 
 export default async function Home() {
-  const currentLocale = await getLocale();
-  const locale: LocaleType = currentLocale === "en" ? "en" : "ar";
+  const locale = await getAppLocale();
 
   return (
     <>
       <Hero locale={locale} />
-      <Features locale={locale} />
-      <Services />
-      <Demos locale={locale} />
-      <Pricing />
-      <FAQs />
-      <Apps />
+      <Features />
+      <Suspense
+        fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
+      >
+        <Services />
+      </Suspense>
+      <Suspense
+        fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
+      >
+        <Demos />
+      </Suspense>
+      <Suspense
+        fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
+      >
+        <Pricing />
+      </Suspense>
+      <Suspense
+        fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
+      >
+        <FAQs />
+      </Suspense>
+      <Suspense
+        fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
+      >
+        <Apps />
+      </Suspense>
     </>
   );
 }

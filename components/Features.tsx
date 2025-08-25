@@ -28,8 +28,7 @@ import "swiper/css/pagination";
 import "swiper/css/a11y";
 import "swiper/css/keyboard";
 import { useState } from "react";
-import LocaleProps from "@/types/LocaleProps";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface FeatureProps {
   image: StaticImageData;
@@ -37,9 +36,10 @@ interface FeatureProps {
   desc: string;
 }
 
-export default function Features({ locale }: LocaleProps) {
+export default function Features() {
   const [swiper, setSwiper] = useState<SwiperType>();
   const t = useTranslations("Features");
+  const locale = useLocale();
 
   const slidesList: FeatureProps[] = [
     {

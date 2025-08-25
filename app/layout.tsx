@@ -4,12 +4,55 @@ import localFont from "next/font/local";
 import NavBar from "@/layouts/NavBar";
 import Footer from "@/layouts/Footer";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
+import { getMessages } from "next-intl/server";
+import getAppLocale from "@/utils/getAppLocale";
 
 export const metadata: Metadata = {
-  title: "FlexiHi",
+  title: "FlexiHi - Complete Business Management Solution",
   description:
     "From the small stuff to the big picture, organizes the work so teams know what to do, why it matters, and how to get it done.",
+  keywords: ["business management", "productivity", "team collaboration", "workflow", "FlexiHi"],
+  authors: [{ name: "FlexiHi Team" }],
+  creator: "FlexiHi",
+  publisher: "FlexiHi",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    alternateLocale: "ar_SA",
+    url: "https://flexihi.com",
+    siteName: "FlexiHi",
+    title: "FlexiHi - Complete Business Management Solution",
+    description:
+      "From the small stuff to the big picture, organizes the work so teams know what to do, why it matters, and how to get it done.",
+    images: [
+      {
+        url: "https://flexihi.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FlexiHi - Business Management Platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@flexihi",
+    creator: "@flexihi",
+    title: "FlexiHi - Complete Business Management Solution",
+    description:
+      "From the small stuff to the big picture, organizes the work so teams know what to do, why it matters, and how to get it done.",
+    images: ["https://flexihi.com/twitter-image.png"],
+  },
+  alternates: {
+    canonical: "https://flexihi.com",
+    languages: {
+      en: "https://flexihi.com",
+      ar: "https://flexihi.com/ar",
+    },
+  },
+  verification: {
+    google: "your-google-site-verification-code",
+  },
 };
 
 const Bukra = localFont({
@@ -70,9 +113,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentLocale = await getLocale();
-  const locale: "en" | "ar" = currentLocale === "en" ? "en" : "ar";
-
+  const locale = await getAppLocale();
   const messages = await getMessages();
 
   return (
@@ -83,7 +124,7 @@ export default async function RootLayout({
     >
       <body>
         <NextIntlClientProvider messages={messages}>
-          <div className="flex h-screen min-h-screen flex-col">
+          <div className="flex min-h-screen flex-col">
             <NavBar locale={locale} />
             <main className="flex-1">{children}</main>
             <Footer locale={locale} />

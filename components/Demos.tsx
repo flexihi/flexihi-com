@@ -8,12 +8,13 @@ import DemoImage6 from "@/public/demo-wholesale.svg";
 import iphone from "@/public/iphone.png";
 
 import arrowIcon from "@/public/demo-open-button-arrow.svg";
-import { useTranslations } from "next-intl";
+import { getTranslations, getLocale } from "next-intl/server";
 import clsx from "clsx";
-import LocaleProps from "@/types/LocaleProps";
 
-export default function Demos({ locale }: LocaleProps) {
-  const t = useTranslations("Demos");
+export default async function Demos() {
+  const t = await getTranslations("Demos");
+  const currentLocale = await getLocale();
+  const locale = currentLocale === "en" ? "en" : "ar";
 
   const DemoItem = ({
     icon,

@@ -9,7 +9,7 @@ export default function Hero({ locale }: LocaleProps) {
   const t = useTranslations("Hero");
 
   return (
-    <div className="relative w-full flex flex-col items-center h-[866px] overflow-x-hidden">
+    <div className="relative w-full flex flex-col items-center min-h-[600px] lg:min-h-[866px] overflow-x-hidden">
       <div className="relative w-full flex justify-center">
         <div className="relative max-w-content w-full">
           <div className="absolute end-[-50px] top-[-50px] w-[406px] h-[406px] bg-accent rounded-full bg-opacity-60" />
