@@ -108,6 +108,12 @@
       "answer": "There are several demos available where you can explore the whole system before subscribing."
     }
   },
+  "Contact": {
+    "title": "Haven't got your answer?",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "email": "Email"
+  },
   "Apps": {
     "title": "Enhance your sales process with FlexiHI!",
     "description": "Download our app today from Google Play or Apple Store"
