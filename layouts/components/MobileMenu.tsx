@@ -1,13 +1,9 @@
 'use client';
 
-import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import { Fragment, useCallback, useEffect } from 'react';
-import Image from 'next/image';
+import { useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { HiX } from 'react-icons/hi';
-import logo from '@/public/navbar-logo.svg';
-import { NAVIGATION_SECTIONS, EXTERNAL_LINKS } from '../constants';
+import { NAVIGATION_SECTIONS, EXTERNAL_LINKS, CONTACT_INFO } from '../constants';
 import LangSwitchButton from '../LangSwitchButton';
 import LocaleProps from '@/types/LocaleProps';
 
@@ -18,6 +14,7 @@ interface MobileMenuProps extends LocaleProps {
 
 export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps) {
   const t = useTranslations('NavBar');
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // Enhanced keyboard navigation
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
@@ -29,7 +26,26 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
         onClose();
         break;
       case 'Tab':
-        // Let headless UI handle focus trap
+        // Keep focus within menu
+        if (menuRef.current) {
+          const focusableElements = menuRef.current.querySelectorAll(
+            'a[href], button, [tabindex]:not([tabindex="-1"])'
+          );
+          const firstElement = focusableElements[0] as HTMLElement;
+          const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+          
+          if (event.shiftKey) {
+            if (document.activeElement === firstElement) {
+              event.preventDefault();
+              lastElement?.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              event.preventDefault();
+              firstElement?.focus();
+            }
+          }
+        }
         break;
       default:
         break;
@@ -37,122 +53,132 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Lock body scroll
+      document.body.style.overflow = 'hidden';
+      
+      // Focus first focusable element
+      setTimeout(() => {
+        const firstFocusable = menuRef.current?.querySelector(
+          'a[href], button'
+        ) as HTMLElement;
+        firstFocusable?.focus();
+      }, 100);
+    } else {
+      // Unlock body scroll
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, handleKeyDown]);
 
   return (
-    <Transition show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={onClose}>
-        <TransitionChild
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
-        </TransitionChild>
-
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-              <TransitionChild
-                as={Fragment}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
-                enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom="translate-x-0"
-                leaveTo="translate-x-full"
-              >
-                <DialogPanel className="pointer-events-auto relative w-screen max-w-md">
-                  <div className="flex h-full flex-col bg-white shadow-xl">
-                    <div className="px-4 py-6 sm:px-6">
-                      <div className="flex items-center justify-between">
-                        <Link href="/" onClick={onClose}>
-                          <Image 
-                            src={logo} 
-                            alt="flexihi logo" 
-                            className="h-8 w-auto" 
-                            loading="lazy"
-                            sizes="120px"
-                          />
-                        </Link>
-                        <button
-                          type="button"
-                          className="relative -m-2 p-2 text-text-secondary hover:text-text-primary transition-colors duration-200"
-                          onClick={onClose}
-                        >
-                          <span className="absolute -inset-0.5" />
-                          <span className="sr-only">Close panel</span>
-                          <HiX className="h-6 w-6" aria-hidden="true" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                      <nav className="flex flex-col space-y-8">
-                        <div className="flex flex-col space-y-6">
-                          <Link
-                            href={NAVIGATION_SECTIONS.features}
-                            className="text-text-primary hover:text-secondary focus:text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
-                            onClick={onClose}
-                          >
-                            {t('features')}
-                          </Link>
-                          <Link
-                            href={NAVIGATION_SECTIONS.pricing}
-                            className="text-text-primary hover:text-secondary focus:text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
-                            onClick={onClose}
-                          >
-                            {t('pricing')}
-                          </Link>
-                          <Link
-                            href={NAVIGATION_SECTIONS.faqs}
-                            className="text-text-primary hover:text-secondary focus:text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
-                            onClick={onClose}
-                          >
-                            {t('faqs')}
-                          </Link>
-                        </div>
-                        
-                        <div className="border-t border-gray-200 pt-6">
-                          <div className="flex flex-col space-y-4">
-                            <a
-                              href={EXTERNAL_LINKS.backOffice}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-secondary hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors duration-200 font-medium text-lg"
-                              onClick={onClose}
-                            >
-                              {t('login')}
-                            </a>
-                            <a
-                              href={EXTERNAL_LINKS.backOffice}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="btn-primary text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                              onClick={onClose}
-                            >
-                              {t('signUp')}
-                            </a>
-                          </div>
-                        </div>
-
-                        <div className="border-t border-gray-200 pt-6">
-                          <LangSwitchButton locale={locale} />
-                        </div>
-                      </nav>
-                    </div>
-                  </div>
-                </DialogPanel>
-              </TransitionChild>
-            </div>
+    <div
+      ref={menuRef}
+      className={`
+        md:hidden w-full bg-white shadow-lg border-t border-gray-200 overflow-hidden transition-all duration-300 ease-out
+        ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
+      `}
+      role="menu"
+      aria-hidden={!isOpen}
+      aria-label="Mobile navigation menu"
+    >
+      <div className="px-5 py-10">
+        {/* Navigation Links */}
+        <div className="flex flex-col gap-4 mb-6">
+          <Link
+            href={NAVIGATION_SECTIONS.features}
+            className="flex items-center gap-2 px-2 py-3 text-[#111927] text-lg font-medium hover:text-[#EF6C00] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            onClick={onClose}
+            role="menuitem"
+          >
+            {t('features')}
+          </Link>
+          <Link
+            href={NAVIGATION_SECTIONS.pricing}
+            className="flex items-center gap-2 px-2 py-3 text-[#111927] text-lg font-medium hover:text-[#EF6C00] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            onClick={onClose}
+            role="menuitem"
+          >
+            {t('pricing')}
+          </Link>
+          <Link
+            href={NAVIGATION_SECTIONS.faqs}
+            className="flex items-center gap-2 px-2 py-3 text-[#111927] text-lg font-medium hover:text-[#EF6C00] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            onClick={onClose}
+            role="menuitem"
+          >
+            {t('faqs')}
+          </Link>
+          
+          {/* Contact Icons Row */}
+          <div className="flex gap-[12px] items-center justify-start mt-2">
+            <a
+              href={`tel:${CONTACT_INFO.phone}`}
+              className="flex items-center justify-center p-[9px] hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+              aria-label="Call us"
+              role="menuitem"
+            >
+              <div className="w-6 h-6 bg-[#EF6C00] rounded-full flex items-center justify-center">
+                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+              </div>
+            </a>
+            <a
+              href={`https://wa.me/${CONTACT_INFO.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center p-[9px] hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+              aria-label="WhatsApp us"
+              role="menuitem"
+            >
+              <div className="w-6 h-6 bg-[#25D366] rounded-full flex items-center justify-center">
+                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+              </div>
+            </a>
+            <a
+              href={`mailto:${CONTACT_INFO.email}`}
+              className="flex items-center justify-center p-[9px] hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+              aria-label="Email us"
+              role="menuitem"
+            >
+              <div className="w-6 h-6 bg-[#4285F4] rounded-full flex items-center justify-center">
+                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+              </div>
+            </a>
           </div>
         </div>
-      </Dialog>
-    </Transition>
+        
+        {/* Divider */}
+        <div className="h-px w-full bg-gray-200 mb-6" />
+        
+        {/* Login and Language Section */}
+        <div className="flex flex-col gap-4">
+          <a
+            href={EXTERNAL_LINKS.backOffice}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-2 py-3 text-[#EF6C00] text-lg font-medium hover:text-[#005394] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            onClick={onClose}
+            role="menuitem"
+          >
+            {t('login')}
+          </a>
+          <div className="flex items-center gap-2 px-2 py-3">
+            <LangSwitchButton locale={locale} />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
