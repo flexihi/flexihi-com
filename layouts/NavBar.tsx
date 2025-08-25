@@ -23,8 +23,8 @@ export default function NavBar({ locale }: LocaleProps) {
       <div className="fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
         <div className="container-responsive">
           <nav className="w-full max-w-content mx-auto flex items-center justify-between nav-mobile-height">
-            {/* Desktop Navigation */}
-            <ul className="hidden md:flex gap-4 lg:gap-6 items-center text-text-primary">
+            {/* Tablet Layout (768-1023px) - Logo + Contact Icons Only */}
+            <div className="hidden md:flex lg:hidden items-center gap-6">
               <Link
                 href="/"
                 className="hover:opacity-80 transition-opacity duration-200"
@@ -32,21 +32,40 @@ export default function NavBar({ locale }: LocaleProps) {
                 <Image 
                   src={logo} 
                   alt="flexihi logo" 
-                  className="me-8 lg:me-14 h-8 lg:h-10 w-auto" 
+                  className="h-8 w-auto" 
                   priority 
-                  sizes="(max-width: 1024px) 120px, 140px"
+                  sizes="120px"
                 />
               </Link>
-              <li className="font-medium text-responsive-base mx-1 lg:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
+              <ErrorBoundary fallback={<div className="text-xs text-red-500">Contact icons unavailable</div>}>
+                <ContactIcons />
+              </ErrorBoundary>
+            </div>
+
+            {/* Desktop Navigation (1024px+) - Full Layout */}
+            <ul className="hidden lg:flex gap-4 xl:gap-6 items-center text-text-primary">
+              <Link
+                href="/"
+                className="hover:opacity-80 transition-opacity duration-200"
+              >
+                <Image 
+                  src={logo} 
+                  alt="flexihi logo" 
+                  className="me-8 xl:me-14 h-8 xl:h-10 w-auto" 
+                  priority 
+                  sizes="(max-width: 1280px) 120px, 140px"
+                />
+              </Link>
+              <li className="font-medium text-responsive-base mx-1 xl:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
                 <Link href={NAVIGATION_SECTIONS.features}>{t("features")}</Link>
               </li>
-              <li className="font-medium text-responsive-base mx-1 lg:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
+              <li className="font-medium text-responsive-base mx-1 xl:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
                 <Link href={NAVIGATION_SECTIONS.pricing}>{t("pricing")}</Link>
               </li>
-              <li className="font-medium text-responsive-base mx-1 lg:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
+              <li className="font-medium text-responsive-base mx-1 xl:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
                 <Link href={NAVIGATION_SECTIONS.faqs}>{t("faqs")}</Link>
               </li>
-              <div className="px-2 lg:px-3 text-gray-300">|</div>
+              <div className="px-2 xl:px-3 text-gray-300">|</div>
               <ErrorBoundary fallback={<div className="text-xs text-red-500">Contact icons unavailable</div>}>
                 <ContactIcons />
               </ErrorBoundary>
@@ -86,7 +105,7 @@ export default function NavBar({ locale }: LocaleProps) {
             </div>
 
             {/* Desktop Right Section */}
-            <ul className="hidden md:flex gap-4 lg:gap-8 items-center text-text-primary">
+            <ul className="hidden md:flex gap-3 lg:gap-4 xl:gap-8 items-center text-text-primary">
               <a
                 href={EXTERNAL_LINKS.backOffice}
                 target="_blank"
@@ -105,7 +124,7 @@ export default function NavBar({ locale }: LocaleProps) {
                 rel="noopener noreferrer"
               >
                 <button
-                  className="text-white font-medium text-responsive-base rounded-xl bg-secondary px-4 lg:px-6 py-2 hover:bg-primary hover:shadow-md transition-all duration-200 touch-target"
+                  className="text-white font-medium text-responsive-base rounded-xl bg-secondary px-3 lg:px-4 xl:px-6 py-2 hover:bg-primary hover:shadow-md transition-all duration-200 touch-target"
                   type="button"
                 >
                   {t("signUp")}
