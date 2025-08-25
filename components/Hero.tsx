@@ -12,25 +12,34 @@ import clsx from 'clsx';
 // - Semantic HTML structure with accessibility improvements
 
 // Memoized button group component for better performance
-const HeroButtons = memo(function HeroButtons({ t }: { t: (key: string) => string }) {
+const HeroButtons = memo(function HeroButtons({
+  t,
+}: {
+  t: (key: string) => string;
+}) {
   return (
-    <div className='flex gap-4 mt-1'>
+    <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4 sm:mt-2 md:mt-1'>
       <a
         href={`${process.env.NEXT_PUBLIC_BACK_OFFICE_URL}`}
         target='_blank'
         rel='noopener noreferrer'
         aria-label='Start using FlexiHi platform'
+        className='w-full sm:w-auto'
       >
         <button
-          className='btn-primary focus-ring'
+          className='btn-primary focus-ring w-full sm:w-auto'
           type='button'
         >
           {t('buttons.start')}
         </button>
       </a>
-      <Link href='/#demos' aria-label='View product demos'>
+      <Link
+        href='/#demos'
+        aria-label='View product demos'
+        className='w-full sm:w-auto'
+      >
         <button
-          className='btn-secondary focus-ring'
+          className='btn-secondary focus-ring w-full sm:w-auto'
           type='button'
         >
           {t('buttons.demos')}
@@ -42,49 +51,52 @@ const HeroButtons = memo(function HeroButtons({ t }: { t: (key: string) => strin
 
 function Hero({ locale }: LocaleProps) {
   const t = useTranslations('Hero');
-  
+
   // Memoize background class calculation
   const backgroundImageClass = useMemo(() => {
     return clsx({
-      'absolute start-0 end-0 top-0 bottom-0 bg-no-repeat bg-bottom bg-contain': true,
-      'bg-[url(/home-hero-bg-ltr.svg)]': locale === 'en',
-      'bg-[url(/home-hero-bg-rtl.svg)]': locale === 'ar',
+      'absolute start-0 end-0 top-0 bottom-0 bg-no-repeat bg-bottom bg-contain':
+        true,
+      // TODO:
+      // 'bg-[url(/home-hero-bg-ltr.svg)]': locale === 'en',
+      // 'bg-[url(/home-hero-bg-rtl.svg)]': locale === 'ar',
     });
-  }, [locale]);
-  
+  }, []);
+
   // Memoize subtitle class calculation
   const subtitleClass = useMemo(() => {
     return clsx({
-      'text-primary-light text-xl uppercase font-semibold leading-10': true,
+      'text-primary-light text-lg md:text-xl uppercase font-semibold leading-8 md:leading-10':
+        true,
       'tracking-widest': locale === 'en',
     });
   }, [locale]);
 
   return (
-    <section 
-      className='relative w-full flex flex-col items-center min-h-[600px] lg:min-h-[866px] overflow-x-hidden'
+    <section
+      className='relative w-full flex flex-col items-center min-h-[600px] md:min-h-[700px] lg:min-h-[866px] overflow-x-hidden'
       aria-label='Hero section showcasing FlexiHi business management platform'
     >
-      {/* Decorative background elements */}
-      <div className='relative w-full flex justify-center'>
+      {/* Decorative background elements - hidden on mobile/tablet */}
+      <div className='relative w-full hidden lg:flex justify-center'>
         <div className='relative max-w-content w-full'>
-          <div 
+          <div
             className='absolute end-[-50px] top-[-50px] w-[406px] h-[406px] bg-accent rounded-full bg-opacity-60'
             aria-hidden='true'
           />
-          <div 
+          <div
             className='absolute end-[443px] top-[464px] w-[168px] h-[168px] bg-primary-light rounded-full bg-opacity-60'
             aria-hidden='true'
           />
         </div>
       </div>
-      
+
       {/* Background blur layer */}
-      <div 
+      <div
         className='absolute start-0 end-0 top-0 bottom-0 bg-[url(/hero-bg-blur.svg)] fill-[#f2f7ffb3] backdrop-blur-[50px]'
         aria-hidden='true'
       />
-      
+
       {/* Locale-specific background */}
       <div className='absolute w-full flex justify-center h-full'>
         <div className='relative max-w-content w-full h-full'>
@@ -96,31 +108,29 @@ function Hero({ locale }: LocaleProps) {
       </div>
 
       {/* Main content */}
-      <div className='relative w-full max-w-content h-full mt-40'>
-        <div className='relative flex gap-4 justify-between items-center'>
-          <div className='flex flex-col gap-4 flex-1 ps-10'>
-            <h2 className={subtitleClass}>
-              {t('subtitle')}
-            </h2>
-            <h1 className='text-primary text-5xl font-bold leading-snug'>
+      <div className='relative w-full max-w-content h-full mt-20 md:mt-32 lg:mt-40'>
+        <div className='relative flex flex-col lg:flex-row gap-8 lg:gap-4 justify-between items-center px-4 md:px-6 lg:px-10'>
+          <div className='flex flex-col gap-4 flex-1 w-full lg:w-auto'>
+            <h2 className={subtitleClass}>{t('subtitle')}</h2>
+            <h1 className='text-primary text-3xl md:text-4xl lg:text-5xl font-bold leading-snug'>
               {t('title')}
             </h1>
-            <p className='text-text-secondary text-lg mt-2 leading-8'>
+            <p className='text-text-secondary text-base md:text-lg mt-2 leading-7 md:leading-8'>
               {t('description')}
             </p>
             <HeroButtons t={t} />
           </div>
-          
-          {/* Optimized chart image */}
-          <div className='flex flex-col gap-4'>
+
+          {/* Responsive chart image */}
+          <div className='flex flex-col gap-4 w-full lg:w-auto lg:flex-shrink-0'>
             <Image
               src={chartImage}
               alt='FlexiHi analytics chart showing business performance metrics'
               priority
-              width={400}
-              height={300}
-              className='object-contain'
-              sizes='(max-width: 768px) 100vw, 400px'
+              width={700}
+              height={525}
+              className='object-contain w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl'
+              sizes='(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 700px'
             />
           </div>
         </div>
