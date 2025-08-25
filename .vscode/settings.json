@@ -33,7 +33,7 @@
     "package-lock.json": true,
     "phpunit.xml": true,
     "postcss.config.mjs": true,
-    "public": true,
+    "public": false,
     "pubspec.lock": true,
     "README.md": true,
     "storage": true,
