@@ -81,18 +81,18 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
       ref={menuRef}
       className={`
         md:hidden w-full bg-white shadow-lg border-t border-gray-200 overflow-hidden transition-all duration-300 ease-out
-        ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
+        ${isOpen ? 'max-h-screen opacity-100 visible' : 'max-h-0 opacity-0 invisible'}
       `}
       role="menu"
       aria-hidden={!isOpen}
       aria-label="Mobile navigation menu"
     >
-      <div className="w-full px-4 sm:px-6 py-10">
+      <div className="w-full px-4 sm:px-6 py-6 sm:py-8">
         {/* Navigation Links */}
-        <div className="flex flex-col gap-4 mb-6">
+        <div className="flex flex-col gap-2 sm:gap-3 mb-6">
           <Link
             href={NAVIGATION_SECTIONS.features}
-            className="flex items-center gap-2 px-2 py-3 text-[#111927] text-lg font-medium hover:text-[#EF6C00] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            className="flex items-center px-3 py-3 sm:py-4 text-[#111927] text-responsive-lg font-medium hover:text-[#EF6C00] hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded-lg touch-target"
             onClick={onClose}
             role="menuitem"
           >
@@ -100,7 +100,7 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
           </Link>
           <Link
             href={NAVIGATION_SECTIONS.pricing}
-            className="flex items-center gap-2 px-2 py-3 text-[#111927] text-lg font-medium hover:text-[#EF6C00] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            className="flex items-center px-3 py-3 sm:py-4 text-[#111927] text-responsive-lg font-medium hover:text-[#EF6C00] hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded-lg touch-target"
             onClick={onClose}
             role="menuitem"
           >
@@ -108,7 +108,7 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
           </Link>
           <Link
             href={NAVIGATION_SECTIONS.faqs}
-            className="flex items-center gap-2 px-2 py-3 text-[#111927] text-lg font-medium hover:text-[#EF6C00] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            className="flex items-center px-3 py-3 sm:py-4 text-[#111927] text-responsive-lg font-medium hover:text-[#EF6C00] hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded-lg touch-target"
             onClick={onClose}
             role="menuitem"
           >
@@ -116,10 +116,10 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
           </Link>
           
           {/* Contact Icons Row */}
-          <div className="flex gap-[12px] items-center justify-start mt-2">
+          <div className="flex gap-3 sm:gap-4 items-center justify-center sm:justify-start mt-4 p-3 bg-gray-50 rounded-lg">
             <a
               href={`tel:${CONTACT_INFO.phone}`}
-              className="flex items-center justify-center p-[9px] hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+              className="flex items-center justify-center p-3 bg-white hover:bg-[#005394] hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded-lg shadow-sm touch-target"
               aria-label="Call us"
               role="menuitem"
             >
@@ -131,7 +131,7 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
               href={`https://wa.me/${CONTACT_INFO.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center p-[9px] hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+              className="flex items-center justify-center p-3 bg-white hover:bg-[#25D366] hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded-lg shadow-sm touch-target"
               aria-label="WhatsApp us"
               role="menuitem"
             >
@@ -141,7 +141,7 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
             </a>
             <a
               href={`mailto:${CONTACT_INFO.email}`}
-              className="flex items-center justify-center p-[9px] hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+              className="flex items-center justify-center p-3 bg-white hover:bg-[#EF6C00] hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded-lg shadow-sm touch-target"
               aria-label="Email us"
               role="menuitem"
             >
@@ -154,21 +154,21 @@ export default function MobileMenu({ locale, isOpen, onClose }: MobileMenuProps)
         </div>
         
         {/* Divider */}
-        <div className="h-px w-full bg-gray-200 mb-6" />
+        <div className="h-px w-full bg-gray-200 mb-4 sm:mb-6" />
         
         {/* Login and Language Section */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           <a
             href={EXTERNAL_LINKS.backOffice}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-2 py-3 text-[#EF6C00] text-lg font-medium hover:text-[#005394] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded"
+            className="flex items-center justify-center px-4 py-3 sm:py-4 text-[#EF6C00] text-responsive-lg font-medium hover:text-white hover:bg-[#EF6C00] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#005394] focus:ring-offset-2 rounded-lg border-2 border-[#EF6C00] touch-target"
             onClick={onClose}
             role="menuitem"
           >
             {t('login')}
           </a>
-          <div className="flex items-center gap-2 px-2 py-3">
+          <div className="flex items-center justify-center px-3 py-2">
             <LangSwitchButton locale={locale} onClose={onClose} />
           </div>
         </div>

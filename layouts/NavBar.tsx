@@ -21,10 +21,10 @@ export default function NavBar({ locale }: LocaleProps) {
     <>
       {/* Navigation Container */}
       <div className="fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
-        <div className="flex w-full justify-center px-4 sm:px-8 lg:px-20">
-          <nav className="w-full max-w-content flex items-center justify-between">
+        <div className="container-responsive">
+          <nav className="w-full max-w-content mx-auto flex items-center justify-between nav-mobile-height">
             {/* Desktop Navigation */}
-            <ul className="hidden md:flex gap-4 items-center py-6 text-text-primary">
+            <ul className="hidden md:flex gap-4 lg:gap-6 items-center text-text-primary">
               <Link
                 href="/"
                 className="hover:opacity-80 transition-opacity duration-200"
@@ -32,30 +32,30 @@ export default function NavBar({ locale }: LocaleProps) {
                 <Image 
                   src={logo} 
                   alt="flexihi logo" 
-                  className="me-14" 
+                  className="me-8 lg:me-14 h-8 lg:h-10 w-auto" 
                   priority 
-                  sizes="(max-width: 768px) 120px, 140px"
+                  sizes="(max-width: 1024px) 120px, 140px"
                 />
               </Link>
-              <li className="font-medium leading-6 mx-1 hover:text-secondary transition-colors duration-200">
+              <li className="font-medium text-responsive-base mx-1 lg:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
                 <Link href={NAVIGATION_SECTIONS.features}>{t("features")}</Link>
               </li>
-              <li className="font-medium leading-6 mx-1 hover:text-secondary transition-colors duration-200">
+              <li className="font-medium text-responsive-base mx-1 lg:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
                 <Link href={NAVIGATION_SECTIONS.pricing}>{t("pricing")}</Link>
               </li>
-              <li className="font-medium leading-6 mx-1 hover:text-secondary transition-colors duration-200">
+              <li className="font-medium text-responsive-base mx-1 lg:mx-2 hover:text-secondary transition-colors duration-200 touch-target">
                 <Link href={NAVIGATION_SECTIONS.faqs}>{t("faqs")}</Link>
               </li>
-              <div className="px-3">|</div>
+              <div className="px-2 lg:px-3 text-gray-300">|</div>
               <ErrorBoundary fallback={<div className="text-xs text-red-500">Contact icons unavailable</div>}>
                 <ContactIcons />
               </ErrorBoundary>
             </ul>
 
             {/* Mobile Header */}
-            <div className="flex md:hidden w-full items-center justify-between py-4">
+            <div className="flex md:hidden w-full items-center justify-between h-full">
               {/* Hamburger Menu + Logo */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <HamburgerIcon 
                   isOpen={isMobileMenuOpen} 
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -67,9 +67,9 @@ export default function NavBar({ locale }: LocaleProps) {
                   <Image 
                     src={logo} 
                     alt="flexihi logo" 
-                    className="h-8 w-auto" 
+                    className="h-7 sm:h-8 w-auto" 
                     priority 
-                    sizes="120px"
+                    sizes="(max-width: 640px) 100px, 120px"
                   />
                 </Link>
               </div>
@@ -79,21 +79,21 @@ export default function NavBar({ locale }: LocaleProps) {
                 href={EXTERNAL_LINKS.backOffice}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#EF6C00] text-white px-3 py-2 rounded-xl text-sm font-medium hover:bg-[#005394] transition-colors duration-200"
+                className="bg-[#EF6C00] text-white px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium hover:bg-[#005394] transition-colors duration-200 touch-target"
               >
                 {t("signUp")}
               </a>
             </div>
 
             {/* Desktop Right Section */}
-            <ul className="hidden md:flex gap-8 items-center py-6 text-text-primary">
+            <ul className="hidden md:flex gap-4 lg:gap-8 items-center text-text-primary">
               <a
                 href={EXTERNAL_LINKS.backOffice}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <button
-                  className="text-secondary font-medium leading-6 hover:text-primary transition-colors duration-200"
+                  className="text-secondary font-medium text-responsive-base hover:text-primary transition-colors duration-200 touch-target"
                   type="button"
                 >
                   {t("login")}
@@ -105,7 +105,7 @@ export default function NavBar({ locale }: LocaleProps) {
                 rel="noopener noreferrer"
               >
                 <button
-                  className="text-white font-medium leading-6 rounded-xl bg-secondary px-6 py-2 hover:bg-primary hover:shadow-md transition-all duration-200"
+                  className="text-white font-medium text-responsive-base rounded-xl bg-secondary px-4 lg:px-6 py-2 hover:bg-primary hover:shadow-md transition-all duration-200 touch-target"
                   type="button"
                 >
                   {t("signUp")}
