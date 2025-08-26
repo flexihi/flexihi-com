@@ -13,14 +13,14 @@ interface ContactMethod {
   id: string;
   label: string;
   href: string;
-  icon: any;
+  icon: string | import('next/image').StaticImageData;
   alt: string;
   ariaLabel: string;
 }
 
 interface ContactMethodProps {
   method: ContactMethod;
-  t: any;
+  t: (key: string) => string;
 }
 
 // Static icon mapping

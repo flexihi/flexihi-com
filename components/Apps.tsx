@@ -11,7 +11,7 @@ import tabletAndPhone from '@/public/tablet-and-phone.png';
 // TypeScript interfaces
 interface AppStoreLink {
   href: string;
-  src: any;
+  src: string | import('next/image').StaticImageData;
   alt: string;
   ariaLabel: string;
 }
