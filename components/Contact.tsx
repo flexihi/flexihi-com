@@ -48,22 +48,24 @@ const ContactMethodItem = memo<ContactMethodProps>(function ContactMethodItem({ 
         href={method.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex gap-2 sm:gap-2.5 items-center justify-center sm:justify-start"
+        className="group flex gap-3 sm:gap-4 lg:gap-5 items-center justify-start transition-all duration-300"
         aria-label={method.ariaLabel}
       >
-        <div className="w-11 h-11 sm:w-14 sm:h-14 lg:w-[68px] lg:h-[68px] flex justify-center items-center bg-[#0288D1] bg-opacity-50 rounded-full p-2 sm:p-3 lg:p-5 group-hover:bg-[#0288D1] group-hover:bg-opacity-70 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-lg">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[68px] lg:h-[68px] flex-shrink-0 flex justify-center items-center bg-[#0288D1]/50 rounded-full p-3 group-hover:bg-[#0288D1]/70 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-200/50">
           <Image
             src={method.icon}
             alt={method.alt}
-            width={18}
-            height={18}
-            className="mx-1 sm:w-5 sm:h-5 lg:w-7 lg:h-7 group-hover:brightness-110 transition-all duration-300"
+            width={20}
+            height={20}
+            className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 group-hover:brightness-110 transition-all duration-300"
             loading="lazy"
           />
         </div>
-        <div className="flex flex-col gap-0.5 sm:gap-1 lg:gap-[3px] font-medium leading-6">
-          <h5 className="text-text-primary text-sm sm:text-base lg:text-base group-hover:text-[#0288D1] transition-colors duration-300">{t(method.label)}</h5>
-          <p className="text-[#0288D1] text-sm sm:text-base lg:text-base group-hover:brightness-110 transition-all duration-300">
+        <div className="flex flex-col gap-0.5 sm:gap-1 lg:gap-1 text-left min-w-0 flex-1">
+          <h5 className="text-text-primary text-sm sm:text-base lg:text-lg font-medium group-hover:text-[#0288D1] transition-colors duration-300 whitespace-nowrap">
+            {t(method.label)}
+          </h5>
+          <p className="text-[#0288D1] text-sm sm:text-base lg:text-lg font-medium group-hover:brightness-110 transition-all duration-300 whitespace-nowrap">
             {method.id === 'call' || method.id === 'whatsapp' 
               ? formatPhoneNumber(CONTACT_INFO.phone)
               : CONTACT_INFO.email
@@ -110,24 +112,26 @@ function Contact() {
 
   return (
     <section 
-      className="w-full flex justify-center bg-white py-12 sm:py-16 lg:py-20"
+      className="w-full flex justify-center bg-[#0288D10A] py-12 sm:py-16 lg:py-20"
       aria-label="Contact us section"
     >
       <div className="max-w-content w-full px-5 sm:px-8 lg:px-20 flex justify-center">
-        <address className="bg-[rgba(2,136,209,0.04)] rounded-xl px-4 sm:px-8 lg:px-16 py-6 sm:py-8 lg:py-11 flex flex-col items-center w-full sm:w-fit not-italic max-w-4xl">
-          <p className="text-text-primary leading-6 text-sm sm:text-base lg:text-base">{t('title')}</p>
+        <address className="bg-white rounded-2xl px-6 sm:px-12 lg:px-16 py-8 sm:py-12 lg:py-16 flex flex-col items-center w-full sm:w-fit not-italic max-w-5xl shadow-sm border border-gray-100">
+          <h2 className="text-text-primary text-base sm:text-lg lg:text-xl font-medium mb-8 sm:mb-10 lg:mb-12 text-center">
+            {t('title')}
+          </h2>
           <ul 
-            className="flex flex-col sm:flex-row gap-6 sm:gap-10 lg:gap-[60px] mt-6 sm:mt-10 lg:mt-[30px] w-full sm:w-auto" 
+            className="flex flex-col sm:flex-row gap-8 sm:gap-12 lg:gap-16 w-full sm:w-auto" 
             role="list" 
             aria-label="Contact methods"
           >
-        {contactMethods.map((method) => (
-          <ContactMethodItem
-            key={method.id}
-            method={method}
-            t={t}
-          />
-        ))}
+            {contactMethods.map((method) => (
+              <ContactMethodItem
+                key={method.id}
+                method={method}
+                t={t}
+              />
+            ))}
           </ul>
         </address>
       </div>
