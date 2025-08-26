@@ -40,18 +40,34 @@ interface DemoCardProps {
 // Memoized demo card component
 const DemoCard = memo(function DemoCard({ demo, locale, t }: DemoCardProps) {
   return (
-    <article className="group border border-gray-200 rounded-xl px-4 py-4 sm:px-6 sm:py-5 lg:px-11 lg:py-6 hover:border-primary-light hover:bg-primary-lightest hover:shadow-sm interactive-hover">
+    <article className="group border border-gray-200 rounded-xl px-4 py-4 sm:px-6 sm:py-5 lg:px-11 lg:py-6 hover:border-primary-light hover:bg-primary-lightest hover:shadow-sm interactive-hover flex flex-col items-center text-center sm:items-start sm:text-left">
       <Image 
         src={demo.icon} 
         alt={`${demo.title} icon`}
         width={48}
         height={48}
-        className="object-contain sm:w-14 sm:h-14 lg:w-16 lg:h-16 transition-all duration-300 group-hover:[filter:invert(16%)_sepia(99%)_saturate(1580%)_hue-rotate(200deg)_brightness(95%)_contrast(99%)]"
+        className="object-contain sm:w-14 sm:h-14 lg:w-16 lg:h-16 transition-all duration-300 group-hover:[filter:invert(16%)_sepia(99%)_saturate(1580%)_hue-rotate(200deg)_brightness(95%)_contrast(99%)] mx-auto sm:mx-0"
       />
       <h3 className="text-text-heading group-hover:text-primary text-lg sm:text-xl lg:text-2xl font-medium leading-tight mt-4 sm:mt-5 lg:mt-6 interactive-hover">
         {demo.title}
       </h3>
-      <ul className="mt-2 sm:mt-3">
+      
+      {/* Mobile: Inline list with separators, Desktop: Vertical list */}
+      <div className="mt-2 sm:mt-3 sm:hidden">
+        <div className="flex flex-wrap justify-center gap-x-2 gap-y-1">
+          {demo.list.map((item, index) => (
+            <span key={index} className="text-text-body text-sm leading-5 flex items-center">
+              {item}
+              {index < demo.list.length - 1 && (
+                <span className="mx-2 text-text-body opacity-60">•</span>
+              )}
+            </span>
+          ))}
+        </div>
+      </div>
+      
+      {/* Desktop: Vertical list */}
+      <ul className="mt-2 sm:mt-3 hidden sm:block">
         {demo.list.map((item, index) => (
           <li key={index} className="text-text-body text-sm sm:text-base leading-5 sm:leading-6">
             {item}
@@ -60,7 +76,7 @@ const DemoCard = memo(function DemoCard({ demo, locale, t }: DemoCardProps) {
       </ul>
 
       <button
-        className="mt-6 sm:mt-7 lg:mt-8 w-full sm:w-auto text-secondary border border-secondary border-opacity-50 hover:shadow-md rounded-xl px-4 py-2 sm:px-5 sm:py-2.5 lg:px-6 lg:py-3 flex gap-2 items-center justify-center sm:justify-start interactive-hover touch-target text-sm sm:text-base"
+        className="mt-4 sm:mt-7 lg:mt-8 w-full sm:w-auto text-secondary border border-secondary border-opacity-50 hover:shadow-md rounded-xl px-4 py-2 sm:px-5 sm:py-2.5 lg:px-6 lg:py-3 flex gap-2 items-center justify-center sm:justify-start interactive-hover touch-target text-sm sm:text-base"
         type="button"
         aria-label={`Open demo for ${demo.title}`}
       >
