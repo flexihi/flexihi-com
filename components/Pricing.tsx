@@ -138,12 +138,13 @@ const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle }: SimpleT
   }, [isMonthly, onToggle]);
 
   return (
-    <div className="flex gap-4 items-center my-20 text-text-heading text-lg leading-5">
+    <div className="flex gap-3 sm:gap-4 items-center my-8 sm:my-12 lg:my-20 text-text-heading text-sm sm:text-base lg:text-lg leading-5">
       <button
         onClick={handleMonthlyClick}
         type="button"
         aria-pressed={isMonthly}
         aria-label="Select monthly billing"
+        className="touch-target"
       >
         Monthly
       </button>
@@ -151,19 +152,20 @@ const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle }: SimpleT
         onClick={handleToggleClick}
         type="button"
         className={clsx({
-          "w-[72px] h-[33px] bg-primary-light hover:bg-primary rounded-2xl flex items-center transition-all duration-300":
+          "w-14 h-7 sm:w-16 sm:h-8 lg:w-[72px] lg:h-[33px] bg-primary-light hover:bg-primary rounded-2xl flex items-center transition-all duration-300":
             true,
           "flex-row-reverse": !isMonthly,
         })}
         aria-label={`Switch to ${isMonthly ? 'yearly' : 'monthly'} billing`}
       >
-        <div className="h-6 w-6 bg-white rounded-full mx-1" />
+        <div className="h-5 w-5 sm:h-6 sm:w-6 bg-white rounded-full mx-1" />
       </button>
       <button
         onClick={handleYearlyClick}
         type="button"
         aria-pressed={!isMonthly}
         aria-label="Select yearly billing"
+        className="touch-target"
       >
         Yearly
       </button>
@@ -174,33 +176,33 @@ const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle }: SimpleT
 // Memoized PlanCard component
 const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
   return (
-    <article className="card-elevated flex-1 gap-6">
+    <article className="card-elevated flex-1 gap-4 sm:gap-5 lg:gap-6 !p-4 sm:!p-6 lg:!p-8">
       <div>
-        <h4 className="text-secondary text-sm font-semibold leading-6 tracking-wide uppercase">
+        <h4 className="text-secondary text-xs sm:text-sm font-semibold leading-6 tracking-wide uppercase">
           {plan.label}
         </h4>
       </div>
       <div>
-        <div className="text-text-heading text-xl font-bold mb-2">OMR</div>
-        <span className="text-text-heading text-5xl font-bold">{plan.price}</span>
-        <span className="text-text-heading text-base">
+        <div className="text-text-heading text-lg sm:text-xl font-bold mb-2">OMR</div>
+        <span className="text-text-heading text-3xl sm:text-4xl lg:text-5xl font-bold">{plan.price}</span>
+        <span className="text-text-heading text-sm sm:text-base lg:text-xl">
           / {isAnnual ? "year" : "month"}
         </span>
       </div>
       <p
         className={clsx({
-          "text-text-muted leading-5 opacity-70": true,
+          "text-text-muted text-sm sm:text-base leading-5 opacity-70": true,
           "text-transparent": !plan.description,
         })}
       >
         {plan.description || "-"}
       </p>
-      <ul className="flex flex-col gap-2" role="list" aria-label={`${plan.label} plan features`}>
+      <ul className="flex flex-col gap-1.5 sm:gap-2" role="list" aria-label={`${plan.label} plan features`}>
         {plan.features.map((feature, index) => (
           <li
             key={index}
             className={clsx({
-              "flex gap-3 leading-6": true,
+              "flex gap-2 sm:gap-3 leading-6 text-sm sm:text-base": true,
               "text-text-heading": feature.available,
               "text-text-disabled": !feature.available,
             })}
@@ -208,9 +210,9 @@ const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
             <Image
               src={feature.available ? enabledIcon : disabledIcon}
               alt={feature.available ? "Included feature" : "Not included feature"}
-              width={24}
-              height={24}
-              className="object-contain"
+              width={20}
+              height={20}
+              className="object-contain sm:w-6 sm:h-6 flex-shrink-0 mt-0.5"
             />
             {feature.label}
           </li>
@@ -218,7 +220,7 @@ const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
       </ul>
       <div className="flex-1" />
       <div>
-        <button className="btn-primary" type="button" aria-label={`Get started with ${plan.label} plan`}>
+        <button className="btn-primary w-full sm:w-auto" type="button" aria-label={`Get started with ${plan.label} plan`}>
           Get started
         </button>
       </div>
@@ -229,18 +231,18 @@ const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
 // Memoized CustomPlan component
 const CustomPlan = memo(function CustomPlan() {
   return (
-    <article className="card-elevated flex-1 gap-12">
+    <article className="card-elevated flex-1 gap-8 sm:gap-10 lg:gap-12 !p-4 sm:!p-6 lg:!p-8">
       <div>
-        <h4 className="text-primary text-sm font-semibold leading-6 tracking-wide uppercase">
+        <h4 className="text-primary text-xs sm:text-sm font-semibold leading-6 tracking-wide uppercase">
           Custom
         </h4>
-        <p className="text-text-muted leading-5 mt-2 opacity-70">
+        <p className="text-text-muted text-sm sm:text-base leading-5 mt-2 opacity-70">
           Looking for more? Contact Us.
         </p>
       </div>
       <div className="flex-1" />
       <div>
-        <button className="btn-outline" type="button">
+        <button className="btn-outline w-full sm:w-auto" type="button">
           Contact us
         </button>
       </div>
@@ -267,23 +269,27 @@ function Pricing() {
       id="pricing"
       aria-label="FlexiHi pricing plans and subscription options"
     >
-      <div className="max-w-content w-full">
+      <div className="max-w-content w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-0">
         <h1 className="section-header">{t("title")}</h1>
         <p className="section-description mb-0">{t("description")}</p>
       </div>
 
       <SimpleToggle isMonthly={isMonthly} onToggle={handleToggle} />
 
-      <div className="flex justify-between gap-9" role="list" aria-label="Available pricing plans">
-        <PlanCard 
-          plan={currentPricing.basic} 
-          isAnnual={false}
-        />
-        <PlanCard 
-          plan={currentPricing.advance} 
-          isAnnual={false}
-        />
-        <CustomPlan />
+      <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-9 max-w-7xl mx-auto" role="list" aria-label="Available pricing plans">
+          <PlanCard 
+            plan={currentPricing.basic} 
+            isAnnual={!isMonthly}
+          />
+          <PlanCard 
+            plan={currentPricing.advance} 
+            isAnnual={!isMonthly}
+          />
+          <div className="md:col-span-2 lg:col-span-1 lg:col-start-3">
+            <CustomPlan />
+          </div>
+        </div>
       </div>
     </section>
   );
