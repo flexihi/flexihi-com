@@ -7,6 +7,7 @@ const Services = lazy(() => import('@/components/Services'));
 const Demos = lazy(() => import('@/components/Demos'));
 const Pricing = lazy(() => import('@/components/Pricing'));
 const FAQs = lazy(() => import('@/components/FAQs'));
+const Contact = lazy(() => import('@/components/Contact'));
 const Apps = lazy(() => import('@/components/Apps'));
 
 export default async function Home() {
@@ -34,7 +35,12 @@ export default async function Home() {
       <Suspense
         fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
       >
-        <FAQs />
+        <FAQs locale={locale} />
+      </Suspense>
+      <Suspense
+        fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
+      >
+        <Contact />
       </Suspense>
       <Suspense
         fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
