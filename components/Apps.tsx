@@ -36,23 +36,23 @@ const APP_STORE_LINKS = {
   }
 } as const;
 
-// Memoized AppStoreButton component
+// Memoized AppStoreButton component with responsive sizing
 const AppStoreButton = memo<AppStoreButtonProps>(function AppStoreButton({ link }) {
   return (
     <a
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="hover:opacity-90 transition-opacity duration-200"
+      className="hover:opacity-90 transition-opacity duration-200 touch-target"
       aria-label={link.ariaLabel}
     >
-      <div className="relative h-16 w-48">
+      <div className="relative h-10 w-32 sm:h-12 sm:w-36 lg:h-14 lg:w-40 xl:h-16 xl:w-48">
         <Image
           src={link.src}
           alt={link.alt}
           fill
           className="object-contain"
-          sizes="192px"
+          sizes="(max-width: 640px) 128px, (max-width: 1024px) 144px, (max-width: 1280px) 160px, 192px"
           loading="lazy"
         />
       </div>
@@ -71,36 +71,66 @@ function Apps() {
 
   return (
     <section 
-      className="w-full flex justify-center bg-primary-light text-white overflow-x-hidden"
+      className="w-full flex justify-center bg-primary-light text-white overflow-hidden relative"
       role="region"
       aria-label="FlexiHi mobile app download section"
     >
-      <div className="max-w-content w-full flex justify-between">
-        <div className="flex flex-col gap-8 ps-20 py-20">
-          <h5 className="text-3xl font-bold leading-9">{t('title')}</h5>
-          <p className="leading-8">{t('description')}</p>
+      <div className="max-w-content w-full relative">
+        {/* Mobile-first responsive layout */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-0 pt-12 sm:pt-16 lg:pt-20 pb-0">
+          
+          {/* Content section */}
+          <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 text-center lg:text-left lg:flex-1 lg:pr-8 pb-8 lg:pb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
+              {t('title')}
+            </h2>
+            <p className="text-sm sm:text-base lg:text-lg leading-relaxed opacity-90">
+              {t('description')}
+            </p>
 
-          <div 
-            className="flex items-center gap-4"
-            role="list"
-            aria-label="App store download options"
-          >
-            {storeLinks.map((link, index) => (
-              <div key={index} role="listitem">
-                <AppStoreButton link={link} />
-              </div>
-            ))}
+            {/* App store buttons */}
+            <div 
+              className="flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mt-2 sm:mt-4"
+              role="list"
+              aria-label="App store download options"
+            >
+              {storeLinks.map((link, index) => (
+                <div key={index} role="listitem">
+                  <AppStoreButton link={link} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="relative w-4/5 h-full">
-          <Image
-            src={tabletAndPhone}
-            alt="FlexiHi mobile application interface displayed on tablet and smartphone devices"
-            className="object-contain absolute bottom-0"
-            priority
-            sizes="(max-width: 768px) 100vw, 80vw"
-            loading="eager"
-          />
+
+          {/* Device images section - positioned to touch bottom */}
+          <div className="relative lg:flex-1 lg:flex lg:justify-end">
+            {/* Mobile: Image touching bottom */}
+            <div className="lg:hidden flex justify-center">
+              <div className="relative w-64 h-32 sm:w-80 sm:h-40">
+                <Image
+                  src={tabletAndPhone}
+                  alt="FlexiHi mobile application interface displayed on tablet and smartphone devices"
+                  fill
+                  className="object-contain object-bottom"
+                  priority
+                  sizes="(max-width: 640px) 256px, 320px"
+                />
+              </div>
+            </div>
+            
+            {/* Desktop: Large image touching bottom */}
+            <div className="hidden lg:block relative w-full max-w-lg xl:max-w-xl 2xl:max-w-2xl h-80 xl:h-80 2xl:h-96">
+              <Image
+                src={tabletAndPhone}
+                alt="FlexiHi mobile application interface displayed on tablet and smartphone devices"
+                fill
+                className="object-contain object-bottom"
+                priority
+                sizes="(max-width: 1280px) 500px, (max-width: 1536px) 600px, 700px"
+              />
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
