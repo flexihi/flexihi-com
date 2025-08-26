@@ -34,93 +34,95 @@ interface PricingConfig {
 interface SimpleToggleProps {
   isMonthly: boolean;
   onToggle: (isMonthly: boolean) => void;
+  t: (key: string) => string;
 }
 
 interface PlanCardProps {
   plan: PlanData;
   isAnnual: boolean;
+  t: (key: string) => string;
 }
 
-// Configuration constant
-const PRICING_DATA: PricingConfig = {
+// Helper function to build pricing configuration with translations
+const buildPricingData = (t: any): PricingConfig => ({
   monthly: {
     basic: {
-      label: "Basic",
-      price: "7.700",
+      label: t("plans.basic.name"),
+      price: t("plans.basic.monthly.price"),
       features: [
-        { label: "Products manager", available: true },
-        { label: "Invoices", available: true },
-        { label: "Dashboard & Reporting", available: true },
-        { label: "Unlimited users", available: true },
-        { label: "Cashier Devices (1 Free)", available: true },
-        { label: "Inventory & Purchases (Add-On)", available: false },
-        { label: "Promotions", available: true },
-        { label: "Loyalty (Add-On)", available: false },
-        { label: "Attendance management", available: true },
-        { label: "Warehouse/branch (Add-On)", available: true },
-        { label: "Installments management", available: true },
+        { label: t("features.productsManager"), available: true },
+        { label: t("features.invoices"), available: true },
+        { label: t("features.dashboardReporting"), available: true },
+        { label: t("features.unlimitedUsers"), available: true },
+        { label: t("features.cashierDevices"), available: true },
+        { label: t("features.inventoryPurchasesAddon"), available: false },
+        { label: t("features.promotions"), available: true },
+        { label: t("features.loyaltyAddon"), available: false },
+        { label: t("features.attendanceManagement"), available: true },
+        { label: t("features.warehouseBranch"), available: true },
+        { label: t("features.installmentsManagement"), available: true },
       ],
     },
     advance: {
-      label: "Advance",
-      price: "11.900",
+      label: t("plans.advance.name"),
+      price: t("plans.advance.monthly.price"),
       features: [
-        { label: "Products manager", available: true },
-        { label: "Invoices", available: true },
-        { label: "Dashboard & Reporting", available: true },
-        { label: "Unlimited users", available: true },
-        { label: "Cashier Devices (1 Free)", available: true },
-        { label: "Inventory & Purchases", available: true },
-        { label: "Promotions", available: true },
-        { label: "Loyalty", available: true },
-        { label: "Attendance management", available: true },
-        { label: "Warehouse/branch (Add-On)", available: true },
-        { label: "Installments management", available: true },
+        { label: t("features.productsManager"), available: true },
+        { label: t("features.invoices"), available: true },
+        { label: t("features.dashboardReporting"), available: true },
+        { label: t("features.unlimitedUsers"), available: true },
+        { label: t("features.cashierDevices"), available: true },
+        { label: t("features.inventoryPurchases"), available: true },
+        { label: t("features.promotions"), available: true },
+        { label: t("features.loyalty"), available: true },
+        { label: t("features.attendanceManagement"), available: true },
+        { label: t("features.warehouseBranch"), available: true },
+        { label: t("features.installmentsManagement"), available: true },
       ],
     },
   },
   yearly: {
     basic: {
-      label: "Basic",
-      price: "6.400",
-      description: "Billed annually at OMR 77",
+      label: t("plans.basic.name"),
+      price: t("plans.basic.yearly.price"),
+      description: t("plans.basic.yearly.description"),
       features: [
-        { label: "Products manager", available: true },
-        { label: "Invoices", available: true },
-        { label: "Dashboard & Reporting", available: true },
-        { label: "Unlimited users", available: true },
-        { label: "Cashier Devices (1 Free)", available: true },
-        { label: "Inventory & Purchases (Add-On)", available: false },
-        { label: "Promotions", available: true },
-        { label: "Loyalty (Add-On)", available: false },
-        { label: "Attendance management", available: true },
-        { label: "Warehouse/branch (Add-On)", available: true },
-        { label: "Installments management", available: true },
+        { label: t("features.productsManager"), available: true },
+        { label: t("features.invoices"), available: true },
+        { label: t("features.dashboardReporting"), available: true },
+        { label: t("features.unlimitedUsers"), available: true },
+        { label: t("features.cashierDevices"), available: true },
+        { label: t("features.inventoryPurchasesAddon"), available: false },
+        { label: t("features.promotions"), available: true },
+        { label: t("features.loyaltyAddon"), available: false },
+        { label: t("features.attendanceManagement"), available: true },
+        { label: t("features.warehouseBranch"), available: true },
+        { label: t("features.installmentsManagement"), available: true },
       ],
     },
     advance: {
-      label: "Advance",
-      price: "9.900",
-      description: "Billed annually at OMR 119",
+      label: t("plans.advance.name"),
+      price: t("plans.advance.yearly.price"),
+      description: t("plans.advance.yearly.description"),
       features: [
-        { label: "Products manager", available: true },
-        { label: "Invoices", available: true },
-        { label: "Dashboard & Reporting", available: true },
-        { label: "Unlimited users", available: true },
-        { label: "Cashier Devices (1 Free)", available: true },
-        { label: "Inventory & Purchases", available: true },
-        { label: "Promotions", available: true },
-        { label: "Loyalty", available: true },
-        { label: "Attendance management", available: true },
-        { label: "Warehouse/branch (Add-On)", available: true },
-        { label: "Installments management", available: true },
+        { label: t("features.productsManager"), available: true },
+        { label: t("features.invoices"), available: true },
+        { label: t("features.dashboardReporting"), available: true },
+        { label: t("features.unlimitedUsers"), available: true },
+        { label: t("features.cashierDevices"), available: true },
+        { label: t("features.inventoryPurchases"), available: true },
+        { label: t("features.promotions"), available: true },
+        { label: t("features.loyalty"), available: true },
+        { label: t("features.attendanceManagement"), available: true },
+        { label: t("features.warehouseBranch"), available: true },
+        { label: t("features.installmentsManagement"), available: true },
       ],
     },
   },
-} as const;
+});
 
 // Memoized SimpleToggle component
-const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle }: SimpleToggleProps) {
+const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle, t }: SimpleToggleProps) {
   const handleMonthlyClick = useCallback(() => {
     if (!isMonthly) {
       onToggle(true);
@@ -146,7 +148,7 @@ const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle }: SimpleT
         aria-label="Select monthly billing"
         className="touch-target"
       >
-        Monthly
+        {t("toggle.monthly")}
       </button>
       <button
         onClick={handleToggleClick}
@@ -167,14 +169,14 @@ const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle }: SimpleT
         aria-label="Select yearly billing"
         className="touch-target"
       >
-        Yearly
+        {t("toggle.yearly")}
       </button>
     </div>
   );
 });
 
 // Memoized PlanCard component
-const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
+const PlanCard = memo(function PlanCard({ plan, isAnnual, t }: PlanCardProps) {
   return (
     <article className="card-elevated flex-1 gap-4 sm:gap-5 lg:gap-6 !p-4 sm:!p-6 lg:!p-8">
       <div>
@@ -183,11 +185,11 @@ const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
         </h4>
       </div>
       <div>
-        <div className="text-text-heading text-lg sm:text-xl font-bold mb-2">OMR</div>
+        <div className="text-text-heading text-lg sm:text-xl font-bold mb-2">{t("plans.basic.currency")}</div>
         <div className="flex items-baseline gap-1 whitespace-nowrap">
           <span className="text-text-heading text-3xl sm:text-4xl lg:text-5xl font-bold">{plan.price}</span>
           <span className="text-text-heading text-sm sm:text-base lg:text-xl">
-            / {isAnnual ? "year" : "month"}
+            / {isAnnual ? t("plans.basic.yearly.period") : t("plans.basic.monthly.period")}
           </span>
         </div>
       </div>
@@ -222,8 +224,8 @@ const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
       </ul>
       <div className="flex-1" />
       <div>
-        <button className="btn-primary w-full sm:w-auto" type="button" aria-label={`Get started with ${plan.label} plan`}>
-          Get started
+        <button className="btn-primary w-full sm:w-auto" type="button" aria-label={`${t("buttons.getStarted")} with ${plan.label} plan`}>
+          {t("buttons.getStarted")}
         </button>
       </div>
     </article>
@@ -231,21 +233,21 @@ const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
 });
 
 // Memoized CustomPlan component
-const CustomPlan = memo(function CustomPlan() {
+const CustomPlan = memo(function CustomPlan({ t }: { t: (key: string) => string }) {
   return (
     <article className="card-elevated flex-1 gap-8 sm:gap-10 lg:gap-12 !p-4 sm:!p-6 lg:!p-8">
       <div>
         <h4 className="text-primary text-xs sm:text-sm font-semibold leading-6 tracking-wide uppercase">
-          Custom
+          {t("plans.custom.name")}
         </h4>
         <p className="text-text-muted text-sm sm:text-base leading-5 mt-2 opacity-70">
-          Looking for more? Contact Us.
+          {t("plans.custom.description")}
         </p>
       </div>
       <div className="flex-1" />
       <div>
         <button className="btn-outline w-full sm:w-auto" type="button">
-          Contact us
+          {t("buttons.contactUs")}
         </button>
       </div>
     </article>
@@ -256,10 +258,13 @@ function Pricing() {
   const t = useTranslations("Pricing");
   const [isMonthly, setMonthly] = useState(false);
 
+  // Build pricing data with translations
+  const PRICING_DATA = useMemo(() => buildPricingData(t), [t]);
+
   // Memoize current pricing data based on toggle state
   const currentPricing = useMemo(() => {
     return isMonthly ? PRICING_DATA.monthly : PRICING_DATA.yearly;
-  }, [isMonthly]);
+  }, [isMonthly, PRICING_DATA]);
 
   const handleToggle = useCallback((monthly: boolean) => {
     setMonthly(monthly);
@@ -276,20 +281,22 @@ function Pricing() {
         <p className="section-description mb-0">{t("description")}</p>
       </div>
 
-      <SimpleToggle isMonthly={isMonthly} onToggle={handleToggle} />
+      <SimpleToggle isMonthly={isMonthly} onToggle={handleToggle} t={t} />
 
       <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-9 max-w-7xl mx-auto" role="list" aria-label="Available pricing plans">
           <PlanCard 
             plan={currentPricing.basic} 
             isAnnual={!isMonthly}
+            t={t}
           />
           <PlanCard 
             plan={currentPricing.advance} 
             isAnnual={!isMonthly}
+            t={t}
           />
           <div className="md:col-span-2 lg:col-span-1 lg:col-start-3">
-            <CustomPlan />
+            <CustomPlan t={t} />
           </div>
         </div>
       </div>

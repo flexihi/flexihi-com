@@ -70,11 +70,123 @@
   },
   "Demos": {
     "title": "Demos",
-    "description": "Whether you're in retail or wholesale, or having restaurants and shops, we’ve got you covered. FlexiHI manages all your inventory and sales requirements."
+    "description": "Whether you're in retail or wholesale, or having restaurants and shops, we've got you covered. FlexiHI manages all your inventory and sales requirements.",
+    "categories": {
+      "retail": {
+        "title": "Retail Stores",
+        "items": [
+          "Clothing store",
+          "Electronic store",
+          "Cold store",
+          "Grocery store"
+        ]
+      },
+      "boutique": {
+        "title": "Boutique Shops",
+        "items": [
+          "Clothing store",
+          "Electronic store",
+          "Cold store",
+          "Grocery store"
+        ]
+      },
+      "flower": {
+        "title": "Flower shops",
+        "items": [
+          "Clothing store",
+          "Electronic store",
+          "Cold store",
+          "Grocery store"
+        ]
+      },
+      "cafe": {
+        "title": "Cafe & Restaurants",
+        "items": [
+          "Clothing store",
+          "Electronic store",
+          "Cold store",
+          "Grocery store"
+        ]
+      },
+      "service": {
+        "title": "Service Business",
+        "items": [
+          "Saloon",
+          "Repair service"
+        ]
+      },
+      "wholesale": {
+        "title": "Wholesale & Warehouse",
+        "items": [
+          "Clothing store",
+          "Electronic store",
+          "Cold store",
+          "Grocery store"
+        ]
+      }
+    },
+    "button": {
+      "openDemo": "Open demo"
+    }
   },
   "Pricing": {
     "title": "Pricing & Plans",
-    "description": "Choose the plan that best fits your requirements and budget. Get started today and take your sales to the next level!"
+    "description": "Choose the plan that best fits your requirements and budget. Get started today and take your sales to the next level!",
+    "toggle": {
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+    },
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "currency": "OMR",
+        "monthly": {
+          "price": "7.700",
+          "period": "month"
+        },
+        "yearly": {
+          "price": "6.400",
+          "period": "year",
+          "description": "Billed annually at OMR 77"
+        }
+      },
+      "advance": {
+        "name": "Advance",
+        "currency": "OMR",
+        "monthly": {
+          "price": "11.900",
+          "period": "month"
+        },
+        "yearly": {
+          "price": "9.900",
+          "period": "year",
+          "description": "Billed annually at OMR 119"
+        }
+      },
+      "custom": {
+        "name": "Custom",
+        "description": "Looking for more? Contact Us."
+      }
+    },
+    "features": {
+      "productsManager": "Products manager",
+      "invoices": "Invoices",
+      "dashboardReporting": "Dashboard & Reporting",
+      "unlimitedUsers": "Unlimited users",
+      "cashierDevices": "Cashier Devices (1 Free)",
+      "inventoryPurchases": "Inventory & Purchases",
+      "inventoryPurchasesAddon": "Inventory & Purchases (Add-On)",
+      "promotions": "Promotions",
+      "loyalty": "Loyalty",
+      "loyaltyAddon": "Loyalty (Add-On)",
+      "attendanceManagement": "Attendance management",
+      "warehouseBranch": "Warehouse/branch (Add-On)",
+      "installmentsManagement": "Installments management"
+    },
+    "buttons": {
+      "getStarted": "Get started",
+      "contactUs": "Contact us"
+    }
   },
   "FAQs": {
     "title": "Frequently Asked Questions",

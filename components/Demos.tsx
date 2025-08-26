@@ -13,95 +13,69 @@ import { useTranslations, useLocale } from "next-intl";
 import { memo, useMemo } from "react";
 import clsx from "clsx";
 
-// Constants for better maintainability
-const DEMOS_CONFIG = [
-  {
-    id: 'retail',
-    icon: DemoImage1,
-    title: "Retail Stores",
-    list: ["Clothing store", "Electronic store", "Cold store", "Grocery store"],
-  },
-  {
-    id: 'boutique',
-    icon: DemoImage2,
-    title: "Boutique Shops",
-    list: ["Clothing store", "Electronic store", "Cold store", "Grocery store"],
-  },
-  {
-    id: 'flower',
-    icon: DemoImage3,
-    title: "Flower shops",
-    list: ["Clothing store", "Electronic store", "Cold store", "Grocery store"],
-  },
-  {
-    id: 'cafe',
-    icon: DemoImage4,
-    title: "Cafe & Restaurants",
-    list: ["Clothing store", "Electronic store", "Cold store", "Grocery store"],
-  },
-  {
-    id: 'service',
-    icon: DemoImage5,
-    title: "Service Business",
-    list: ["Saloon", "Repair service"],
-  },
-  {
-    id: 'wholesale',
-    icon: DemoImage6,
-    title: "Wholesale & Warehouse",
-    list: ["Clothing store", "Electronic store", "Cold store", "Grocery store"],
-  },
-] as const;
+// Constants for demo icons mapping
+const DEMO_ICONS = {
+  retail: DemoImage1,
+  boutique: DemoImage2,
+  flower: DemoImage3,
+  cafe: DemoImage4,
+  service: DemoImage5,
+  wholesale: DemoImage6,
+} as const;
 
 // Type definitions
 interface DemoItemData {
-  id: string;
+  id: keyof typeof DEMO_ICONS;
   icon: StaticImageData;
   title: string;
-  list: readonly string[];
+  list: string[];
 }
 
 interface DemoCardProps {
   demo: DemoItemData;
   locale: string;
+  t: (key: string) => string;
 }
 
 // Memoized demo card component
-const DemoCard = memo(function DemoCard({ demo, locale }: DemoCardProps) {
+const DemoCard = memo(function DemoCard({ demo, locale, t }: DemoCardProps) {
   return (
-    <article className="group border border-gray-200 rounded-xl px-11 py-6 hover:border-primary-light hover:bg-primary-lightest hover:shadow-sm interactive-hover">
+    <article className="group border border-gray-200 rounded-xl px-4 py-4 sm:px-6 sm:py-5 lg:px-11 lg:py-6 hover:border-primary-light hover:bg-primary-lightest hover:shadow-sm interactive-hover">
       <Image 
         src={demo.icon} 
         alt={`${demo.title} icon`}
-        width={64}
-        height={64}
-        className="object-contain"
+        width={48}
+        height={48}
+        className="object-contain sm:w-14 sm:h-14 lg:w-16 lg:h-16"
       />
-      <h3 className="text-text-heading group-hover:text-primary text-2xl font-medium leading-7 mt-6 interactive-hover">
+      <h3 className="text-text-heading group-hover:text-primary text-lg sm:text-xl lg:text-2xl font-medium leading-tight mt-4 sm:mt-5 lg:mt-6 interactive-hover">
         {demo.title}
       </h3>
-      <ul className="mt-3">
+      <ul className="mt-2 sm:mt-3">
         {demo.list.map((item, index) => (
-          <li key={index} className="text-text-body leading-6">
+          <li key={index} className="text-text-body text-sm sm:text-base leading-5 sm:leading-6">
             {item}
           </li>
         ))}
       </ul>
 
       <button
-        className="mt-8 text-secondary border border-secondary border-opacity-50 hover:shadow-md rounded-xl px-6 py-3 flex gap-2 items-center interactive-hover"
+        className="mt-6 sm:mt-7 lg:mt-8 w-full sm:w-auto text-secondary border border-secondary border-opacity-50 hover:shadow-md rounded-xl px-4 py-2 sm:px-5 sm:py-2.5 lg:px-6 lg:py-3 flex gap-2 items-center justify-center sm:justify-start interactive-hover touch-target text-sm sm:text-base"
         type="button"
         aria-label={`Open demo for ${demo.title}`}
       >
-        Open demo
+        {t("button.openDemo")}
         <Image
           src={arrowIcon}
           alt="arrow"
-          width={16}
-          height={16}
-          className={clsx({
-            "scale-x-[-1]": locale === "ar",
-          })}
+          width={14}
+          height={14}
+          className={clsx(
+            "sm:w-4 sm:h-4",
+            {
+              "scale-x-[-1]": locale === "ar",
+            }
+          )}
         />
       </button>
     </article>
@@ -113,8 +87,23 @@ function Demos() {
   const currentLocale = useLocale();
   const locale = currentLocale === "en" ? "en" : "ar";
 
-  // Memoize demos data to prevent recreation on every render
-  const demosData = useMemo(() => DEMOS_CONFIG, []);
+  // Build demos data with translations
+  const demosData = useMemo(() => {
+    const categories = ['retail', 'boutique', 'flower', 'cafe', 'service', 'wholesale'] as const;
+    return categories.map((categoryId) => ({
+      id: categoryId,
+      icon: DEMO_ICONS[categoryId],
+      title: t(`categories.${categoryId}.title`),
+      list: [
+        t(`categories.${categoryId}.items.0`),
+        t(`categories.${categoryId}.items.1`),
+        ...(categoryId === 'service' ? [] : [
+          t(`categories.${categoryId}.items.2`),
+          t(`categories.${categoryId}.items.3`)
+        ])
+      ]
+    }));
+  }, [t]);
 
   return (
     <section
@@ -125,9 +114,9 @@ function Demos() {
       <div className="max-w-content w-full">
         <h1 className="section-header">{t("title")}</h1>
         <p className="section-description">{t("description")}</p>
-        <div className="flex justify-between mt-12">
+        <div className="mt-8 sm:mt-10 lg:mt-12 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-0">
           <div 
-            className="grid grid-cols-2 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto"
             role="list"
             aria-label="Demo categories list"
           >
@@ -136,10 +125,12 @@ function Demos() {
                 key={demo.id}
                 demo={demo}
                 locale={locale}
+                t={t}
               />
             ))}
           </div>
-          <div className="w-[480px] h-[960px]">
+          {/* iPhone image preserved for future use - currently hidden */}
+          {/* <div className="w-[480px] h-[960px] hidden">
             <Image 
               src={iphone} 
               alt="FlexiHi mobile application interface on iPhone"
@@ -148,7 +139,7 @@ function Demos() {
               priority
               className="object-contain"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

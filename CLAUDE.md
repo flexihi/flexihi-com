@@ -41,8 +41,6 @@ IMPORTANT: Always use Playwright MCP to access it and test the changes.
 ### Key Libraries
 
 - **next-intl 4.3.5** - Internationalization with server-side support
-- **Swiper 11.2.10** - Modern touch slider for carousels
-- **@headlessui/react 2.2.7** - Unstyled, accessible UI components
 - **react-icons 5.5.0** - Popular icon library
 - **cookies-next 6.1.0** - Cookie management for Next.js
 - **clsx 2.1.1** - Conditional className utility
