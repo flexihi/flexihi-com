@@ -138,7 +138,7 @@ const SimpleToggle = memo(function SimpleToggle({ isMonthly, onToggle }: SimpleT
   }, [isMonthly, onToggle]);
 
   return (
-    <div className="flex gap-3 sm:gap-4 items-center my-8 sm:my-12 lg:my-20 text-text-heading text-sm sm:text-base lg:text-lg leading-5">
+    <div className="flex gap-3 sm:gap-4 items-center my-6 sm:my-8 lg:my-10 text-text-heading text-sm sm:text-base lg:text-lg leading-5">
       <button
         onClick={handleMonthlyClick}
         type="button"
@@ -184,10 +184,12 @@ const PlanCard = memo(function PlanCard({ plan, isAnnual }: PlanCardProps) {
       </div>
       <div>
         <div className="text-text-heading text-lg sm:text-xl font-bold mb-2">OMR</div>
-        <span className="text-text-heading text-3xl sm:text-4xl lg:text-5xl font-bold">{plan.price}</span>
-        <span className="text-text-heading text-sm sm:text-base lg:text-xl">
-          / {isAnnual ? "year" : "month"}
-        </span>
+        <div className="flex items-baseline gap-1 whitespace-nowrap">
+          <span className="text-text-heading text-3xl sm:text-4xl lg:text-5xl font-bold">{plan.price}</span>
+          <span className="text-text-heading text-sm sm:text-base lg:text-xl">
+            / {isAnnual ? "year" : "month"}
+          </span>
+        </div>
       </div>
       <p
         className={clsx({
