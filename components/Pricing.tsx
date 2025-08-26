@@ -44,7 +44,7 @@ interface PlanCardProps {
 }
 
 // Helper function to build pricing configuration with translations
-const buildPricingData = (t: any): PricingConfig => ({
+const buildPricingData = (t: (key: string) => string): PricingConfig => ({
   monthly: {
     basic: {
       label: t("plans.basic.name"),

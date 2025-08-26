@@ -43,12 +43,12 @@ const formatPhoneNumber = (phoneNumber: string): string => {
 // Memoized ContactMethod component
 const ContactMethodItem = memo<ContactMethodProps>(function ContactMethodItem({ method, t }) {
   return (
-    <li className="w-full sm:w-auto">
+    <li className="w-full sm:w-auto flex justify-center sm:justify-start">
       <a
         href={method.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex gap-3 sm:gap-4 lg:gap-5 items-center justify-start transition-all duration-300"
+        className="group flex gap-3 sm:gap-4 lg:gap-5 items-center justify-start transition-all duration-300 w-fit"
         aria-label={method.ariaLabel}
       >
         <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[68px] lg:h-[68px] flex-shrink-0 flex justify-center items-center bg-[#0288D1]/50 rounded-full p-3 group-hover:bg-[#0288D1]/70 transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-200/50">
@@ -112,16 +112,16 @@ function Contact() {
 
   return (
     <section 
-      className="w-full flex justify-center bg-[#0288D10A] py-12 sm:py-16 lg:py-20"
+      className="w-full flex justify-center bg-white py-12 sm:py-16 lg:py-20"
       aria-label="Contact us section"
     >
-      <div className="max-w-content w-full px-5 sm:px-8 lg:px-20 flex justify-center">
-        <address className="bg-white rounded-2xl px-6 sm:px-12 lg:px-16 py-8 sm:py-12 lg:py-16 flex flex-col items-center w-full sm:w-fit not-italic max-w-5xl shadow-sm border border-gray-100">
+      <div className="max-w-content w-full px-3 sm:px-6 md:px-8 lg:px-20 flex justify-center">
+        <address className="bg-[#0288D10A] rounded-2xl px-4 sm:px-8 md:px-12 lg:px-16 py-8 sm:py-12 lg:py-16 flex flex-col items-center w-full sm:w-fit not-italic max-w-5xl shadow-sm border border-gray-100 mx-2 sm:mx-4 md:mx-6">
           <h2 className="text-text-primary text-base sm:text-lg lg:text-xl font-medium mb-8 sm:mb-10 lg:mb-12 text-center">
             {t('title')}
           </h2>
           <ul 
-            className="flex flex-col sm:flex-row gap-8 sm:gap-12 lg:gap-16 w-full sm:w-auto" 
+            className="flex flex-col sm:flex-row gap-8 sm:gap-12 lg:gap-16 w-full sm:w-auto items-center sm:items-stretch" 
             role="list" 
             aria-label="Contact methods"
           >

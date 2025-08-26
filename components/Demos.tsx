@@ -7,7 +7,6 @@ import DemoImage3 from '@/public/demo-flowers.svg';
 import DemoImage4 from '@/public/demo-cafe.svg';
 import DemoImage5 from '@/public/demo-service.svg';
 import DemoImage6 from '@/public/demo-wholesale.svg';
-import iphone from '@/public/iphone.png';
 import arrowIcon from '@/public/demo-open-button-arrow.svg';
 import { useTranslations, useLocale } from 'next-intl';
 import { memo, useMemo } from 'react';
