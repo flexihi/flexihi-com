@@ -53,12 +53,12 @@ const NavigationControls = memo(function NavigationControls({
   const arrowClassName = locale === "ar" ? "scale-x-[-1]" : "";
   
   return (
-    <div className="flex justify-between items-center mt-6">
+    <div className="hidden lg:flex justify-between items-center mt-6">
       <div className="flex gap-4">
         <button
           onClick={onPrevious}
           type="button"
-          className="btn-icon focus-ring"
+          className="w-16 h-16 bg-primary rounded-full flex items-center justify-center hover:bg-primary-light transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           aria-label={`Previous feature (${currentSlide}/${totalSlides})`}
         >
           <Image
@@ -72,7 +72,59 @@ const NavigationControls = memo(function NavigationControls({
         <button
           onClick={onNext}
           type="button"
-          className="btn-icon focus-ring"
+          className="w-16 h-16 bg-primary rounded-full flex items-center justify-center hover:bg-primary-light transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          aria-label={`Next feature (${currentSlide + 2}/${totalSlides})`}
+        >
+          <Image
+            src={arrowForward}
+            alt="next slide"
+            className={arrowClassName}
+            width={24}
+            height={24}
+          />
+        </button>
+      </div>
+      <div 
+        className="text-text-secondary font-medium leading-6"
+        aria-live="polite"
+      >
+        {currentSlide + 1}/{totalSlides}
+      </div>
+    </div>
+  );
+});
+
+// Mobile navigation controls with centered, stacked layout
+const MobileNavigationControls = memo(function MobileNavigationControls({
+  onPrevious,
+  onNext,
+  currentSlide,
+  totalSlides,
+  locale,
+}: NavigationControlsProps) {
+  const arrowClassName = locale === "ar" ? "scale-x-[-1]" : "";
+  
+  return (
+    <div className="lg:hidden flex flex-col items-center gap-4 mt-4">
+      <div className="flex gap-4">
+        <button
+          onClick={onPrevious}
+          type="button"
+          className="w-14 h-14 bg-primary rounded-full flex items-center justify-center hover:bg-primary-light transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          aria-label={`Previous feature (${currentSlide}/${totalSlides})`}
+        >
+          <Image
+            src={arrowBack}
+            alt="previous slide"
+            className={arrowClassName}
+            width={24}
+            height={24}
+          />
+        </button>
+        <button
+          onClick={onNext}
+          type="button"
+          className="w-14 h-14 bg-primary rounded-full flex items-center justify-center hover:bg-primary-light transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           aria-label={`Next feature (${currentSlide + 2}/${totalSlides})`}
         >
           <Image
@@ -133,13 +185,15 @@ function Features() {
 
   return (
     <section
-      className="w-full flex justify-center mb-20 section-anchor overflow-x-hidden"
+      className="w-full flex justify-center py-12 lg:py-24 section-anchor overflow-x-hidden bg-primary-lightest"
       id="features"
       aria-label="FlexiHi product features showcase"
     >
-      <div className="max-w-content w-full overflow-x-hidden">
-        <h1 className="section-header">{t("title")}</h1>
-        <p className="section-description">{t("description")}</p>
+      <div className="max-w-content w-full overflow-x-hidden px-6 sm:px-8 md:px-12 lg:px-16">
+        <div className="px-6 sm:px-8 md:px-12">
+          <h1 className="section-header">{t("title")}</h1>
+          <p className="section-description">{t("description")}</p>
+        </div>
 
         <div role="region" aria-label="Features carousel" className="relative w-full">
           <Carousel
@@ -153,15 +207,15 @@ function Features() {
           >
             <CarouselContent className="-ml-4">
               {slidesList.map((slide) => (
-                <CarouselItem key={slide.index} className="pt-10 pb-20 pl-4 basis-full">
+                <CarouselItem key={slide.index} className="pt-6 pb-4 lg:pt-10 lg:pb-20 pl-4 basis-full">
                   <article className="w-full">
                     {/* Mobile Layout - Stacked */}
-                    <div className="lg:hidden flex flex-col gap-8 items-center">
-                      <div className="w-full max-w-md">
+                    <div className="lg:hidden flex flex-col gap-4 items-center">
+                      <div className="w-full max-w-sm max-h-[200px] flex items-center justify-center">
                         <Image
                           src={slide.image}
                           alt={`${slide.title} example`}
-                          className="object-contain w-full h-auto"
+                          className="object-contain w-full h-full max-h-[200px]"
                           width={400}
                           height={300}
                           priority={slide.index === 0}
@@ -169,25 +223,18 @@ function Features() {
                         />
                       </div>
                       <div className="w-full max-w-lg text-center">
-                        <h4 className="text-text-primary text-2xl font-bold leading-8 whitespace-pre-line mb-4">
+                        <h4 className="text-text-primary text-xl lg:text-2xl font-bold leading-7 lg:leading-8 whitespace-pre-line mb-3 lg:mb-4">
                           {slide.title}
                         </h4>
-                        <p className="text-text-secondary leading-8 mb-6">
+                        <p className="text-text-secondary leading-7 lg:leading-8 mb-4 lg:mb-6">
                           {slide.desc}
                         </p>
-                        <NavigationControls
-                          onPrevious={handlePrevious}
-                          onNext={handleNext}
-                          currentSlide={current}
-                          totalSlides={TOTAL_FEATURES}
-                          locale={locale}
-                        />
                       </div>
                     </div>
 
                     {/* Desktop Layout - Side by Side */}
-                    <div className="hidden lg:flex gap-8 justify-center items-start max-w-full">
-                      <div className="max-w-[540px] flex flex-col min-h-[400px]">
+                    <div className="hidden lg:flex gap-8 xl:gap-12 justify-center items-start max-w-full px-8 lg:px-12">
+                      <div className="max-w-[540px] flex flex-col min-h-[400px] flex-1">
                         <h4 className="text-text-primary text-2xl font-bold leading-8 whitespace-pre-line mb-6">
                           {slide.title}
                         </h4>
@@ -202,11 +249,11 @@ function Features() {
                           locale={locale}
                         />
                       </div>
-                      <div className="relative w-1/2 flex justify-center">
+                      <div className="relative flex-1 flex justify-center max-w-lg">
                         <Image
                           src={slide.image}
                           alt={`${slide.title} example`}
-                          className="object-contain"
+                          className="object-contain w-full h-auto"
                           width={600}
                           height={400}
                           priority={slide.index === 0}
@@ -219,6 +266,15 @@ function Features() {
               ))}
             </CarouselContent>
           </Carousel>
+          
+          {/* Fixed Mobile Navigation Controls */}
+          <MobileNavigationControls
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+            currentSlide={current}
+            totalSlides={TOTAL_FEATURES}
+            locale={locale}
+          />
         </div>
       </div>
     </section>
