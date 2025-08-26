@@ -72,7 +72,7 @@ function Hero({ locale }: LocaleProps) {
 
   return (
     <section
-      className='relative w-full flex flex-col items-center min-h-[600px] md:min-h-[700px] lg:min-h-[866px] overflow-x-hidden'
+      className='relative w-full flex flex-col items-center min-h-[600px] md:min-h-[700px] lg:min-h-[866px] overflow-x-hidden bg-primary-lightest'
       aria-label='Hero section showcasing FlexiHi business management platform'
     >
       {/* Decorative background elements - hidden on mobile/tablet */}
