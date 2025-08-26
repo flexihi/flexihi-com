@@ -119,7 +119,7 @@ function Apps() {
             </div>
             
             {/* Desktop: Large image touching bottom */}
-            <div className="hidden lg:block relative w-full max-w-lg xl:max-w-xl 2xl:max-w-2xl h-80 xl:h-80 2xl:h-96">
+            <div className="hidden lg:block relative w-full max-w-lg xl:max-w-xl 2xl:max-w-2xl h-72 lg:h-96 xl:h-96 2xl:h-96">
               <Image
                 src={tabletAndPhone}
                 alt="FlexiHi mobile application interface displayed on tablet and smartphone devices"
