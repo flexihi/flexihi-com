@@ -21,11 +21,11 @@ export default async function Home() {
       >
         <Services />
       </Suspense>
-      <Suspense
+      {/* <Suspense
         fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
       >
         <Demos />
-      </Suspense>
+      </Suspense> */}
       <Suspense
         fallback={<div className='w-full h-32 bg-gray-50 animate-pulse' />}
       >

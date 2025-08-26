@@ -45,7 +45,7 @@ interface ServiceCardProps {
 const ServiceCard = memo(function ServiceCard({ service, t, index }: ServiceCardProps) {
   return (
     <li className="group">
-      <article className="flex flex-col items-center md:items-start text-center md:text-left transition-transform duration-300 hover:transform hover:scale-[1.02] focus-within:transform focus-within:scale-[1.02]">
+      <article className="flex flex-col items-center lg:items-start text-center lg:text-left transition-transform duration-300 hover:transform hover:scale-[1.02] focus-within:transform focus-within:scale-[1.02]">
         <div className="transition-transform duration-300 group-hover:scale-110">
           <Image 
             src={service.icon} 
@@ -60,7 +60,7 @@ const ServiceCard = memo(function ServiceCard({ service, t, index }: ServiceCard
         <h3 className="mt-6 md:mt-9 text-text-primary text-base md:text-lg font-bold leading-tight transition-colors duration-200 group-hover:text-secondary">
           {t(`${service.translationKey}.title`)}
         </h3>
-        <p className="mt-4 text-text-secondary text-sm md:text-base leading-6 md:leading-8 text-center md:text-left transition-colors duration-200 group-hover:text-text-primary">
+        <p className="mt-4 text-text-secondary text-sm md:text-base leading-6 md:leading-8 text-center lg:text-left transition-colors duration-200 group-hover:text-text-primary">
           {t(`${service.translationKey}.description`)}
         </p>
       </article>
@@ -84,7 +84,7 @@ function Services() {
         <p className="section-description">{t("description")}</p>
         
         <ul 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12 md:[&>*:nth-child(3)]:col-start-1 md:[&>*:nth-child(3)]:col-end-3 md:[&>*:nth-child(3)]:justify-self-center lg:[&>*:nth-child(3)]:col-start-auto lg:[&>*:nth-child(3)]:col-end-auto lg:[&>*:nth-child(3)]:justify-self-auto"
           role="list"
           aria-label="Services list"
         >
