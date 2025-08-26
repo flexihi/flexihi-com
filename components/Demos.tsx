@@ -46,7 +46,7 @@ const DemoCard = memo(function DemoCard({ demo, locale, t }: DemoCardProps) {
         alt={`${demo.title} icon`}
         width={48}
         height={48}
-        className="object-contain sm:w-14 sm:h-14 lg:w-16 lg:h-16"
+        className="object-contain sm:w-14 sm:h-14 lg:w-16 lg:h-16 transition-all duration-300 group-hover:[filter:invert(16%)_sepia(99%)_saturate(1580%)_hue-rotate(200deg)_brightness(95%)_contrast(99%)]"
       />
       <h3 className="text-text-heading group-hover:text-primary text-lg sm:text-xl lg:text-2xl font-medium leading-tight mt-4 sm:mt-5 lg:mt-6 interactive-hover">
         {demo.title}
